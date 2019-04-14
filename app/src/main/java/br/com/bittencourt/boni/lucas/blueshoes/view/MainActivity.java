@@ -1,5 +1,6 @@
 package br.com.bittencourt.boni.lucas.blueshoes.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -18,6 +19,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -55,10 +57,11 @@ public class MainActivity extends AppCompatActivity
     private RelativeLayout rl_header_user_not_logged;
     private RelativeLayout rl_header_user_logged;
     private View v_nav_vertical_line;
+    private Button bt_login;
 
 
 
-    private User user = new User( "Lucas Boni", R.drawable.user,true);
+    private User user = new User( "Lucas Boni", R.drawable.user,false);
 
     private SelectionTracker<Long> selectNavMenuItems;
     private List<NavMenuItem> navMenuItems;
@@ -80,6 +83,7 @@ public class MainActivity extends AppCompatActivity
         rl_header_user_logged = findViewById(R.id.rl_header_user_logged);
         v_nav_vertical_line = findViewById(R.id.v_nav_vertical_line);
         drawer_layout = findViewById(R.id.drawer_layout);
+        bt_login = findViewById(R.id.bt_login);
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -93,6 +97,15 @@ public class MainActivity extends AppCompatActivity
 
         //NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         //navigationView.setNavigationItemSelectedListener(this);
+
+
+        bt_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callLoginActivity(v);
+            }
+        });
+
     }
 
     @Override
@@ -330,6 +343,11 @@ public class MainActivity extends AppCompatActivity
 
     public void updateToolbarTitleInFragment(int about_frag_title) {
         toolbar.setTitle(about_frag_title);
+    }
+
+    void callLoginActivity(  View view){
+        Intent intent = new Intent( this, LoginActivity.class);
+        startActivity( intent );
     }
 
     public class SelectObserverNavMenuItems extends SelectionTracker.SelectionObserver<Long>{
