@@ -13,9 +13,9 @@
             android:name=".view.LoginActivity"
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
+            <!--meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="br.com.bittencourt.boni.lucas.blueshoes.view.MainActivity"/>
+                android:value="br.com.bittencourt.boni.lucas.blueshoes.view.MainActivity"/-->
         </activity>
         <activity
             android:name=".view.MainActivity"

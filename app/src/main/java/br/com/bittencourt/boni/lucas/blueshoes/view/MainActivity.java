@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity
     public static final String ID_SELECTED_ITEM_LOGGED = "id-selected-item-logged";
     public static final String ID_SELECTED_ITEM = "id-selected-item";
     public static final String FRAGMENT_TAG  = "frag-tag";
+    public static final String  FRAGMENT_ID = "frag-id";
 
     private Toolbar toolbar;
     private RecyclerView rv_menu_items;
@@ -206,12 +207,25 @@ public class MainActivity extends AppCompatActivity
             selectNavMenuItemsLogged.onRestoreInstanceState( savedInstanceState );
         }
         else{//se nao selecionado o objeto co o promeiro id
+
+            /*
+             * Verificando se há algum item ID em intent. Caso não,
+             * utilize o ID do primeiro item.
+             * */
+            int fragId = 0;
+            if(getIntent()!=null) {
+                fragId = getIntent().getIntExtra(FRAGMENT_ID, 0);
+            }
+            if(fragId == 0){
+                fragId = R.id.item_all_shoes;
+            }
+
             /*
              * O primeiro item do menu gaveta deve estar selecionado
              * caso não seja uma reinicialização de tela / atividade.
              * O primeiro item aqui é o de ID 1.
              * */
-            selectNavMenuItems.select((long)R.id.item_all_shoes );
+            selectNavMenuItems.select((long)fragId );
         }
         addObserverList();//coloca depois para nenhum dos dois menus ficarem null
     }
@@ -299,9 +313,24 @@ public class MainActivity extends AppCompatActivity
          * haverá um fragmento em memória, então busca-se o
          * inicial.
          * */
+        int fragId=0;
         if( fragment == null ){
-            fragment = getFragment(R.id.item_about);
+
+            /*
+             * Caso haja algum ID de fragmento em intent, então
+             * é este fragmento que deve ser acionado. Caso
+             * contrário, abra o fragmento comum de início.
+             * */
+
+            if(getIntent()!=null) {
+                fragId = getIntent().getIntExtra(FRAGMENT_ID, 0);
+            }
+            if( fragId == 0 ){
+                fragId = R.id.item_about;
+            }
         }
+
+        fragment = getFragment(fragId);
 
         replaceFragment(fragment);
     }
@@ -349,6 +378,28 @@ public class MainActivity extends AppCompatActivity
         Intent intent = new Intent( this, LoginActivity.class);
         startActivity( intent );
     }
+
+
+    void callPrivacyPolicyFragment( View  view){
+        Intent intent = new Intent(this,MainActivity.class);
+
+        /*
+         * Para saber qual fragmento abrir quando a
+         * MainActivity voltar ao foreground.
+         * */
+        intent.putExtra(MainActivity.FRAGMENT_ID,R.id.item_privacy_policy);
+
+        /*
+         * Removendo da pilha de atividades a primeira
+         * MainActivity aberta (e a LoginActivity), para
+         * deixar somente a nova MainActivity com uma nova
+         * configuração de fragmento aberto.
+         * */
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+        startActivity( intent );
+    }
+
 
     public class SelectObserverNavMenuItems extends SelectionTracker.SelectionObserver<Long>{
 
@@ -423,8 +474,6 @@ public class MainActivity extends AppCompatActivity
              * */
             drawer_layout.closeDrawer( GravityCompat.START );//fechar a gaveta que esta aberta
         }
-
-
 
     }
 

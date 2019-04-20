@@ -29,13 +29,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.blankj.utilcode.util.KeyboardUtils;
 import com.blankj.utilcode.util.ScreenUtils;
 
 import br.com.bittencourt.boni.lucas.blueshoes.R;
+import br.com.bittencourt.boni.lucas.blueshoes.util.extension_functions;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends FormActivity {
 
     private EditText et_email;
     private EditText et_password;
@@ -43,24 +45,29 @@ public class LoginActivity extends AppCompatActivity {
     private Button bt_login;
     private FrameLayout fl_form_container;
     private TextView tv_privacy_policy;
-    private  TextView tv_sign_up;
+    private TextView tv_sign_up;
+    private TextView tv_forgot_password;
+
+    private FrameLayout fl_form;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);//ativa a setade voltar do actionbar
+
+        fl_form= findViewById(R.id.fl_form);
 
         /*
-         * Hackcode para que a imagem de background do layout não
-         * se ajuste de acordo com a abertura do teclado de
-         * digitação. Caso utilizando o atributo
-         * android:background, o ajuste ocorre, desconfigurando o
-         * layout.
+         * Colocando a View de um arquivo XML como View filha
+         * do item indicado no terceiro argumento.
          * */
-        getWindow().setBackgroundDrawableResource(R.drawable.bg_activity);
+        View.inflate(this,R.layout.content_login,fl_form);
+
+        //setContentView(R.layout.activity_login);
+        //Toolbar toolbar = findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);//ativa a setade voltar do actionbar
+
+
 
         et_email =findViewById(R.id.et_email);
         et_password = findViewById(R.id.et_password);
@@ -69,19 +76,16 @@ public class LoginActivity extends AppCompatActivity {
         fl_form_container = findViewById(R.id.fl_form_container);
         tv_privacy_policy = findViewById(R.id.tv_privacy_policy);
         tv_sign_up = findViewById(R.id.tv_sign_up);
+        tv_forgot_password = findViewById(R.id.tv_forgot_password);
+
 
 
         et_email.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence content, int start, int count, int after) {
-                String message = getString(R.string.invalid_email);
-
-
-                if( !content.toString().isEmpty() && Patterns.EMAIL_ADDRESS.matcher(content).matches())//verifica se é um email valido
-                    message = null;
-
-                et_email.setError(message);
-
+                if(!extension_functions.isValidEmail(content)){
+                    et_email.setError(getString(R.string.invalid_email));
+                }
             }
 
             @Override
@@ -98,12 +102,9 @@ public class LoginActivity extends AppCompatActivity {
         et_password.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence content, int start, int count, int after) {
-                String message = getString(R.string.invalid_password);
-
-                if( content.length() > 5 )//checa se esta muito pequeno
-                    message = null;
-
-                et_password.setError(message);
+                if(!extension_functions.isValidPassword(content)){
+                    et_password.setError(getString(R.string.invalid_password));
+                }
             }
 
             @Override
@@ -120,7 +121,7 @@ public class LoginActivity extends AppCompatActivity {
         bt_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                login(v);
+                mainAction(v);
             }
         });
 
@@ -134,15 +135,44 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public boolean onEditorAction(TextView view, int actionId, KeyEvent event) {
 
-                if( actionId == EditorInfo.IME_ACTION_DONE ){//verifica seapertou no botão done
-                    closeVirtualKeyBoard( view );
-                    login(view);
-                    return true; /* Indica que o algoritmo do método consumiu o evento. */
-                }
+                //if( actionId == EditorInfo.IME_ACTION_DONE ){//verifica seapertou no botão done(removido pois so umbotao tem vinculo com ese evento)
+                    //closeVirtualKeyBoard( view );
+                    mainAction(view);
 
+                    //return true; /* Indica que o algoritmo do método consumiu o evento. */
+                //}
+                    /*
+                    O return false indica à API interna que o listener de toque em algum botão de
+                    action no teclado virtual não foi consumido e que o processamento interno deve
+                    prosseguir. Porém, segundo testes, o processamento interno é apenas o fechamento
+                    do teclado virtua
+                    */
                 return false;
             }
         });
+
+        tv_forgot_password.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callForgotPasswordActivity(v);
+            }
+        });
+
+        tv_sign_up.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callSignUpActivity(v);
+            }
+        });
+
+        if(tv_privacy_policy!=null) {
+            tv_privacy_policy.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    callPrivacyPolicyFragment(v);
+                }
+            });
+        }
 
         /*
          * Com a API KeyboardUtils conseguimos de maneira
@@ -167,6 +197,24 @@ public class LoginActivity extends AppCompatActivity {
     protected void onDestroy() {
         KeyboardUtils.unregisterSoftInputChangedListener(this);
         super.onDestroy();
+    }
+
+    @Override
+    void mainAction(View view) { /* Antigo login() */
+        blockFields( true );
+        isMainButtonSending( true );
+        showProxy( true );
+        backEndFakeDelay();
+    }
+
+    @Override
+    void blockFields(Boolean status) {
+
+    }
+
+    @Override
+    void isMainButtonSending(Boolean status) {/* Antigo isSignInGoing() */
+
     }
 
     /*
@@ -194,8 +242,7 @@ public class LoginActivity extends AppCompatActivity {
          * Acessando o TextView padrão do SnackBar para assim
          * colocarmos um ícone nele via objeto Spannable.
          * */
-        View snackBarView = snackBar.getView();
-        TextView textView = snackBarView.findViewById(android.support.design.R.id.snackbar_text);
+        TextView textView = snackBar.getView().findViewById(android.support.design.R.id.snackbar_text);
 
         /*
          * Criando o objeto Drawable que entrará como ícone
@@ -249,7 +296,7 @@ public class LoginActivity extends AppCompatActivity {
      * Muda o rótulo do botão de login de acordo com o status
      * do envio de dados de login.
      * */
-    private void isSignInGoing( boolean status ){
+    private void isMainButtonSending( boolean status ){/* Antigo isSignInGoing() */
 
         if(status){
             bt_login.setText( getString( R.string.sign_in_going ));/* Entrando... */
@@ -273,7 +320,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         blockFields( false );
-                        isSignInGoing( false );
+                        isMainButtonSending( false );
                         showProxy( false );
                         snackBarFeedback(fl_form_container,false,getString( R.string.invalid_login )
                         );
@@ -284,12 +331,12 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    public void login(View view){
+    /*public void login(View view){
         blockFields( true );
         isSignInGoing( true );
         showProxy( true );
         backEndFakeDelay();
-    }
+    }*/
 
     //esconde oteclado virtual
     private void closeVirtualKeyBoard( View view ){
@@ -300,6 +347,8 @@ public class LoginActivity extends AppCompatActivity {
 
 
     private void changePrivacyPolicyConstraints(boolean isKeyBoardOpened){
+
+        if(tv_privacy_policy == null) return;
 
         int privacyId = tv_privacy_policy.getId();
         ConstraintLayout parent = (ConstraintLayout)tv_privacy_policy.getParent();
@@ -359,6 +408,19 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         constraintSet.applyTo( parent );
+    }
+
+
+    private void callForgotPasswordActivity( View view){
+        Toast.makeText(this,"TODO: callForgotPasswordActivity()",Toast.LENGTH_SHORT).show();
+    }
+
+    private void callSignUpActivity(View view){
+        Toast.makeText(this,"TODO: callSignUpActivity()",Toast.LENGTH_SHORT).show();
+    }
+
+    private void callPrivacyPolicyFragment(View view){
+        /* TODO */
     }
 
 }
