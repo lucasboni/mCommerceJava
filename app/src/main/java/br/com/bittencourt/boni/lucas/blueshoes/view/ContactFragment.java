@@ -35,6 +35,7 @@ public class ContactFragment extends Fragment implements View.OnClickListener {
 
     private ImageView iv_address;
     private TextView tv_address;
+    private TextView tv_info_block;
 
 
     @Override
@@ -54,6 +55,8 @@ public class ContactFragment extends Fragment implements View.OnClickListener {
         iv_address = view.findViewById(R.id.iv_address);
         tv_address = view.findViewById(R.id.tv_address);
 
+        tv_info_block =view.findViewById(R.id.tv_info_block);
+
         iv_phone_cities.setOnClickListener(this);
         tv_phone_cities.setOnClickListener(this);
         iv_phone_other_regions.setOnClickListener(this);
@@ -66,6 +69,8 @@ public class ContactFragment extends Fragment implements View.OnClickListener {
 
         iv_address.setOnClickListener(this);
         tv_address.setOnClickListener(this);
+
+        tv_info_block.setText(getString( R.string.contact_frag_info));
     }
 
     @Override

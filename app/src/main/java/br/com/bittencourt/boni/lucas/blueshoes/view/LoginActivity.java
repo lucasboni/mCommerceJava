@@ -1,6 +1,7 @@
 package br.com.bittencourt.boni.lucas.blueshoes.view;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -204,17 +205,24 @@ public class LoginActivity extends FormActivity {
         blockFields( true );
         isMainButtonSending( true );
         showProxy( true );
-        backEndFakeDelay();
+        backEndFakeDelay(false,getString( R.string.invalid_login ));
     }
 
     @Override
     void blockFields(Boolean status) {
-
+        et_email.setEnabled(!status);
+        et_password.setEnabled(!status);
+        bt_login.setEnabled(!status);
     }
 
     @Override
     void isMainButtonSending(Boolean status) {/* Antigo isSignInGoing() */
 
+        if(status){
+            bt_login.setText( getString( R.string.sign_in_going ));/* Entrando... */
+        }else{
+            bt_login.setText( getString( R.string.sign_in ));/* Entrar */
+        }
     }
 
     /*
@@ -282,70 +290,6 @@ public class LoginActivity extends FormActivity {
         snackBar.show();
     }
 
-    /*
-     * Necessário para que os campos de formulário não possam
-     * ser acionados depois de enviados os dados.
-     * */
-    private void blockFields( boolean status ){
-        et_email.setEnabled(!status);
-        et_password.setEnabled(!status);
-        bt_login.setEnabled(!status);
-    }
-
-    /*
-     * Muda o rótulo do botão de login de acordo com o status
-     * do envio de dados de login.
-     * */
-    private void isMainButtonSending( boolean status ){/* Antigo isSignInGoing() */
-
-        if(status){
-            bt_login.setText( getString( R.string.sign_in_going ));/* Entrando... */
-        }else{
-            bt_login.setText( getString( R.string.sign_in ));/* Entrar */
-        }
-    }
-
-    private void backEndFakeDelay(){
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                /*
-                 * Simulando um delay de latência de
-                 * 1 segundo.
-                 * */
-                SystemClock.sleep( 1000 );
-
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        blockFields( false );
-                        isMainButtonSending( false );
-                        showProxy( false );
-                        snackBarFeedback(fl_form_container,false,getString( R.string.invalid_login )
-                        );
-                    }
-                });
-            }
-        }).start();
-
-    }
-
-    /*public void login(View view){
-        blockFields( true );
-        isSignInGoing( true );
-        showProxy( true );
-        backEndFakeDelay();
-    }*/
-
-    //esconde oteclado virtual
-    private void closeVirtualKeyBoard( View view ){
-        InputMethodManager imm = (InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow( view.getWindowToken(), 0 );
-    }
-
-
-
     private void changePrivacyPolicyConstraints(boolean isKeyBoardOpened){
 
         if(tv_privacy_policy == null) return;
@@ -412,7 +356,8 @@ public class LoginActivity extends FormActivity {
 
 
     private void callForgotPasswordActivity( View view){
-        Toast.makeText(this,"TODO: callForgotPasswordActivity()",Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this,ForgotPasswordActivity.class);
+        startActivity(intent);
     }
 
     private void callSignUpActivity(View view){

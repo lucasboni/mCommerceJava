@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
@@ -26,6 +27,7 @@ public abstract class FormActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private FrameLayout fl_proxy_container;
+    private FrameLayout fl_form_container;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,6 +37,7 @@ public abstract class FormActivity extends AppCompatActivity {
 
         toolbar =findViewById(R.id.toolbar);
         fl_proxy_container =findViewById(R.id.fl_proxy_container);
+        fl_form_container =findViewById(R.id.fl_form_container);
 
         setSupportActionBar( toolbar );
 
@@ -165,5 +168,34 @@ public abstract class FormActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected( item);
+    }
+
+    /*
+     * Fake method - Somente para testes temporários em atividades
+     * e fragmentos que contêm formulários.
+     * */
+    protected void backEndFakeDelay(final Boolean statusAction,final String feedbackMessage){
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                /*
+                 * Simulando um delay de latência de
+                 * 1 segundo.
+                 * */
+                SystemClock.sleep( 1000 );
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        blockFields( false );
+                        isMainButtonSending( false );
+                        showProxy( false );
+                        snackBarFeedback(fl_form_container,statusAction,feedbackMessage);
+                    }
+                });
+            }
+        }).start();
+
     }
 }
