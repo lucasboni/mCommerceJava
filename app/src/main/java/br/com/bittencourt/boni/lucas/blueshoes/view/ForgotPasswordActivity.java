@@ -57,24 +57,8 @@ public class ForgotPasswordActivity extends FormActivity {
         bt_recover_password= findViewById(R.id.bt_recover_password);
 
 
-        et_email.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence content, int start, int count, int after) {
-                if(!extension_functions.isValidEmail(content)){
-                    et_email.setError(getString(R.string.invalid_email));
-                }
-            }
+        extension_functions.isValidEmail(et_email,getString(R.string.invalid_email));
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
 
 
         bt_recover_password.setOnClickListener(new View.OnClickListener() {
@@ -107,19 +91,6 @@ public class ForgotPasswordActivity extends FormActivity {
             bt_recover_password.setText( getString( R.string.sign_in_going ));/* Entrando... */
         }else{
             bt_recover_password.setText( getString( R.string.sign_in ));/* Entrar */
-        }
-    }
-
-    /*
-     * Apresenta a tela de bloqueio que diz ao usuário que
-     * algo está sendo processado em background e que ele
-     * deve aguardar.
-     * */
-    private void showProxy(boolean status){
-        if(status){
-            fl_proxy_container.setVisibility(View.VISIBLE);
-        }else{
-            fl_proxy_container.setVisibility(View.GONE);
         }
     }
 

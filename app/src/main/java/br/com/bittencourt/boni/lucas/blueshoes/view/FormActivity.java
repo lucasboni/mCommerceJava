@@ -64,7 +64,7 @@ public abstract class FormActivity extends AppCompatActivity {
      * algo está sendo processado em background e que ele
      * deve aguardar.
      * */
-    private void showProxy(boolean status){
+    protected void showProxy(boolean status){
         if(status){
             fl_proxy_container.setVisibility(View.VISIBLE);
         }else{
@@ -198,4 +198,6 @@ public abstract class FormActivity extends AppCompatActivity {
         }).start();
 
     }
+
+
 }

@@ -81,43 +81,9 @@ public class LoginActivity extends FormActivity {
 
 
 
-        et_email.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence content, int start, int count, int after) {
-                if(!extension_functions.isValidEmail(content)){
-                    et_email.setError(getString(R.string.invalid_email));
-                }
-            }
+        extension_functions.isValidEmail(et_email,getString(R.string.invalid_email));
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        et_password.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence content, int start, int count, int after) {
-                if(!extension_functions.isValidPassword(content)){
-                    et_password.setError(getString(R.string.invalid_password));
-                }
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
+        extension_functions.isValidPassword(et_password,getString(R.string.invalid_password));
 
         bt_login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -225,18 +191,6 @@ public class LoginActivity extends FormActivity {
         }
     }
 
-    /*
-     * Apresenta a tela de bloqueio que diz ao usuário que
-     * algo está sendo processado em background e que ele
-     * deve aguardar.
-     * */
-    private void showProxy(boolean status){
-        if(status){
-            fl_proxy_container.setVisibility(View.VISIBLE);
-        }else{
-            fl_proxy_container.setVisibility(View.GONE);
-        }
-    }
 
     /*
      * Método responsável por apresentar um SnackBar com as
@@ -361,7 +315,8 @@ public class LoginActivity extends FormActivity {
     }
 
     private void callSignUpActivity(View view){
-        Toast.makeText(this,"TODO: callSignUpActivity()",Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this,SignUpActivity.class);
+        startActivity(intent);
     }
 
     private void callPrivacyPolicyFragment(View view){
