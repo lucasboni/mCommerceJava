@@ -1,32 +1,20 @@
 package br.com.bittencourt.boni.lucas.blueshoes.view;
 
-import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
-import android.support.constraint.ConstraintSet;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
-import android.text.Editable;
 import android.text.SpannableString;
 import android.text.Spanned;
-import android.text.TextWatcher;
 import android.text.style.ImageSpan;
-import android.view.KeyEvent;
-import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.blankj.utilcode.util.KeyboardUtils;
-import com.blankj.utilcode.util.ScreenUtils;
 
 import br.com.bittencourt.boni.lucas.blueshoes.R;
 import br.com.bittencourt.boni.lucas.blueshoes.util.extension_functions;
@@ -38,19 +26,11 @@ public class ForgotPasswordActivity extends FormActivity {
     private Button bt_recover_password;
 
 
-    private FrameLayout fl_form;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        fl_form= findViewById(R.id.fl_form);
-
-        /*
-         * Colocando a View de um arquivo XML como View filha
-         * do item indicado no terceiro argumento.
-         * */
-        View.inflate(this,R.layout.content_forgot_password,fl_form);
 
         et_email =findViewById(R.id.et_email);
         fl_proxy_container = findViewById(R.id.fl_proxy_container);
@@ -59,23 +39,17 @@ public class ForgotPasswordActivity extends FormActivity {
 
         extension_functions.isValidEmail(et_email,getString(R.string.invalid_email));
 
-
-
-        bt_recover_password.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mainAction(v);
-            }
-        });
-
-
     }
 
+
     @Override
-    void mainAction(View view) { /* Antigo login() */
-        blockFields( true );
-        isMainButtonSending( true );
-        showProxy( true );
+    protected int getLayoutResourceID() {
+        return R.layout.content_forgot_password;
+    }
+
+
+    @Override
+    void backEndFakeDelay() {
         backEndFakeDelay(false,getString( R.string.invalid_login ));
     }
 

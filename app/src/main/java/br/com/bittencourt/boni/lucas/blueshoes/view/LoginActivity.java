@@ -1,44 +1,32 @@
 package br.com.bittencourt.boni.lucas.blueshoes.view;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.text.Editable;
 import android.text.SpannableString;
 import android.text.Spanned;
-import android.text.TextWatcher;
 import android.text.style.ImageSpan;
-import android.util.Patterns;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.blankj.utilcode.util.KeyboardUtils;
 import com.blankj.utilcode.util.ScreenUtils;
 
 import br.com.bittencourt.boni.lucas.blueshoes.R;
 import br.com.bittencourt.boni.lucas.blueshoes.util.extension_functions;
 
-public class LoginActivity extends FormActivity {
+public class LoginActivity extends FormEmailAndPasswordActivity {
 
     private EditText et_email;
     private EditText et_password;
@@ -49,25 +37,10 @@ public class LoginActivity extends FormActivity {
     private TextView tv_sign_up;
     private TextView tv_forgot_password;
 
-    private FrameLayout fl_form;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        fl_form= findViewById(R.id.fl_form);
-
-        /*
-         * Colocando a View de um arquivo XML como View filha
-         * do item indicado no terceiro argumento.
-         * */
-        View.inflate(this,R.layout.content_login,fl_form);
-
-        //setContentView(R.layout.activity_login);
-        //Toolbar toolbar = findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);//ativa a setade voltar do actionbar
-
 
 
         et_email =findViewById(R.id.et_email);
@@ -84,13 +57,6 @@ public class LoginActivity extends FormActivity {
         extension_functions.isValidEmail(et_email,getString(R.string.invalid_email));
 
         extension_functions.isValidPassword(et_password,getString(R.string.invalid_password));
-
-        bt_login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mainAction(v);
-            }
-        });
 
         et_password.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 
@@ -140,37 +106,16 @@ public class LoginActivity extends FormActivity {
                 }
             });
         }
-
-        /*
-         * Com a API KeyboardUtils conseguimos de maneira
-         * simples obter o status atual do teclado virtual (aberto /
-         * fechado) e assim prosseguir com algoritmos de ajuste de
-         * layout.
-         * */
-        KeyboardUtils.registerSoftInputChangedListener(this, new KeyboardUtils.OnSoftInputChangedListener() {
-            @Override
-            public void onSoftInputChanged(int height) {
-                if( ScreenUtils.isPortrait() ){
-                    changePrivacyPolicyConstraints(
-                            KeyboardUtils.isSoftInputVisible( LoginActivity.this )
-                    );
-                }
-            }
-        });
-
     }
 
     @Override
-    protected void onDestroy() {
-        KeyboardUtils.unregisterSoftInputChangedListener(this);
-        super.onDestroy();
+    protected int getLayoutResourceID() {
+        return R.layout.content_login;
     }
 
+
     @Override
-    void mainAction(View view) { /* Antigo login() */
-        blockFields( true );
-        isMainButtonSending( true );
-        showProxy( true );
+    void backEndFakeDelay() {
         backEndFakeDelay(false,getString( R.string.invalid_login ));
     }
 
@@ -244,68 +189,26 @@ public class LoginActivity extends FormActivity {
         snackBar.show();
     }
 
-    private void changePrivacyPolicyConstraints(boolean isKeyBoardOpened){
+    @Override
+    boolean isConstraintToSiblingView(boolean isKeyBoardOpened) {
+        return isKeyBoardOpened;
+    }
 
-        if(tv_privacy_policy == null) return;
-
-        int privacyId = tv_privacy_policy.getId();
-        ConstraintLayout parent = (ConstraintLayout)tv_privacy_policy.getParent();
-        ConstraintSet constraintSet =  new ConstraintSet();
-
+    @Override
+    void setConstraintsRelativeToSiblingView(ConstraintSet constraintSet, int privacyId) {
         /*
-         * Definindo a largura e a altura da View em
-         * mudança de constraints, caso contrário ela
-         * fica com largura e altura em 0dp.
+         * Se o teclado virtual estiver aberto, então
+         * mude a configuração da View alvo
+         * (tv_privacy_policy) para ficar vinculada a
+         * View acima dela (tv_sign_up).
          * */
-        constraintSet.constrainWidth(
+        constraintSet.connect(
                 privacyId,
-                ConstraintLayout.LayoutParams.WRAP_CONTENT
+                ConstraintLayout.LayoutParams.TOP,
+                tv_sign_up.getId(),
+                ConstraintLayout.LayoutParams.BOTTOM,
+                (int) (12 * ScreenUtils.getScreenDensity())
         );
-        constraintSet.constrainHeight(
-                privacyId,
-                ConstraintLayout.LayoutParams.WRAP_CONTENT
-        );
-
-        /*
-         * Centralizando a View horizontalmente no
-         * ConstraintLayout.
-         * */
-        constraintSet.centerHorizontally(
-                privacyId,
-                ConstraintLayout.LayoutParams.PARENT_ID
-        );
-
-        if( isKeyBoardOpened ){
-            /*
-             * Se o teclado virtual estiver aberto, então
-             * mude a configuração da View alvo
-             * (tv_privacy_policy) para ficar vinculada a
-             * View acima dela (tv_sign_up).
-             * */
-            constraintSet.connect(
-                    privacyId,
-                    ConstraintLayout.LayoutParams.TOP,
-                    tv_sign_up.getId(),
-                    ConstraintLayout.LayoutParams.BOTTOM,
-                    (int)(12 * ScreenUtils.getScreenDensity())
-            );
-        }
-        else{
-            /*
-             * Se o teclado virtual estiver fechado, então
-             * mude a configuração da View alvo
-             * (tv_privacy_policy) para ficar vinculada ao
-             * fundo do ConstraintLayout ancestral.
-             * */
-            constraintSet.connect(
-                    privacyId,
-                    ConstraintLayout.LayoutParams.BOTTOM,
-                    ConstraintLayout.LayoutParams.PARENT_ID,
-                    ConstraintLayout.LayoutParams.BOTTOM
-            );
-        }
-
-        constraintSet.applyTo( parent );
     }
 
 
@@ -319,8 +222,9 @@ public class LoginActivity extends FormActivity {
         startActivity(intent);
     }
 
-    private void callPrivacyPolicyFragment(View view){
-        /* TODO */
+    @Override
+    protected boolean isAbleToCallChangePrivacyPolicyConstraints() {
+        return ScreenUtils.isPortrait();
     }
 
 }

@@ -35,6 +35,15 @@ public abstract class FormActivity extends AppCompatActivity {
         setContentView( R.layout.activity_form);
 
 
+        FrameLayout fl_form = findViewById(R.id.fl_form);
+
+        /*
+         * Colocando a View de um arquivo XML como View filha
+         * do item indicado no terceiro argumento.
+         * */
+        View.inflate(this, getLayoutResourceID(), fl_form);
+
+
         toolbar =findViewById(R.id.toolbar);
         fl_proxy_container =findViewById(R.id.fl_proxy_container);
         fl_form_container =findViewById(R.id.fl_form_container);
@@ -56,6 +65,11 @@ public abstract class FormActivity extends AppCompatActivity {
          * layout.
          * */
         getWindow().setBackgroundDrawableResource( R.drawable.bg_activity );
+    }
+
+
+    protected int getLayoutResourceID() {
+        return R.layout.content_forgot_password;
     }
 
 
@@ -146,7 +160,23 @@ public abstract class FormActivity extends AppCompatActivity {
      * de dados. Algoritmo vinculado ao menos ao principal
      * botão em tela.
      * */
-    abstract void mainAction(View view);
+    /*
+     * Método template.
+     * Responsável por conter o algoritmo de envio / validação
+     * de dados. Algoritmo vinculado ao menos ao principal
+     * botão em tela.
+     * */
+    void mainAction(View view) {
+        blockFields(true);
+        isMainButtonSending(true);
+        showProxy(true);
+        backEndFakeDelay();
+    }
+
+    /*
+     * Método único.
+     * */
+    abstract void backEndFakeDelay();
 
     /*
      * Necessário para que os campos de formulário não possam

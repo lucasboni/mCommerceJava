@@ -11,9 +11,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.recyclerview.selection.SelectionTracker;
+
 import java.util.List;
 
-import androidx.recyclerview.selection.SelectionTracker;
 import br.com.bittencourt.boni.lucas.blueshoes.R;
 import br.com.bittencourt.boni.lucas.blueshoes.domain.NavMenuItem;
 import br.com.bittencourt.boni.lucas.blueshoes.util.NavMenuItemDetails;
