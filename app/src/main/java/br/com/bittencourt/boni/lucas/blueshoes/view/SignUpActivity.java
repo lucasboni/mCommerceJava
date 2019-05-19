@@ -30,9 +30,6 @@ public class SignUpActivity extends FormEmailAndPasswordActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-
-
         et_email = findViewById(R.id.et_email);
         et_password = findViewById(R.id.et_password);
         et_confirm_password = findViewById(R.id.et_confirm_password);
@@ -83,14 +80,7 @@ public class SignUpActivity extends FormEmailAndPasswordActivity {
         });
 
 
-        if (tv_privacy_policy != null) {
-            tv_privacy_policy.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    callPrivacyPolicyFragment(v);
-                }
-            });
-        }
+
     }
 
 

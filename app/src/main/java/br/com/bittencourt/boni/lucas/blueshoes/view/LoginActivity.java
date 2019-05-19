@@ -98,14 +98,6 @@ public class LoginActivity extends FormEmailAndPasswordActivity {
             }
         });
 
-        if(tv_privacy_policy!=null) {
-            tv_privacy_policy.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    callPrivacyPolicyFragment(v);
-                }
-            });
-        }
     }
 
     @Override

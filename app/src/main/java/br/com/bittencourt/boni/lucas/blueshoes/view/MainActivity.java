@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity
     private RelativeLayout rl_header_user_logged;
     private View v_nav_vertical_line;
     private Button bt_login;
+    private TextView tv_sign_up;
 
 
 
@@ -84,6 +85,7 @@ public class MainActivity extends AppCompatActivity
         v_nav_vertical_line = findViewById(R.id.v_nav_vertical_line);
         drawer_layout = findViewById(R.id.drawer_layout);
         bt_login = findViewById(R.id.bt_login);
+        tv_sign_up = findViewById(R.id.tv_sign_up);
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -103,6 +105,14 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 callLoginActivity(v);
+            }
+        });
+
+        tv_sign_up.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,SignUpActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -379,7 +389,7 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    void callPrivacyPolicyFragment( View  view){
+    public void callPrivacyPolicyFragment( View  view){
         Intent intent = new Intent(this,MainActivity.class);
 
         /*

@@ -34,7 +34,7 @@ public abstract class FormEmailAndPasswordActivity extends FormActivity implemen
     }
 
     /* Listeners de clique */
-    protected void callPrivacyPolicyFragment(View view) {
+    public void callPrivacyPolicyFragment(View view) {
         Intent intent = new Intent(
                 this,
                 MainActivity.class);
