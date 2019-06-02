@@ -9,4 +9,12 @@ public class AccountSettingItem {
         this.label = label;
         this.description = description;
     }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public String getDescription() {
+        return description;
+    }
 }

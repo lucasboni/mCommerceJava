@@ -9,13 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity
             android:name=".view.LoginActivity"
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme.NoActionBar">
-            <!--meta-data
+
+            <!--
+                meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="br.com.bittencourt.boni.lucas.blueshoes.view.MainActivity"/-->
+                android:value="br.com.bittencourt.boni.lucas.blueshoes.view.MainActivity"/
+            -->
         </activity>
         <activity
             android:name=".view.MainActivity"
@@ -27,17 +31,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".view.ForgotPasswordActivity"
             android:label="@string/title_activity_forgot_password"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".view.SignUpActivity"
             android:label="@string/title_activity_sign_up"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.AccountSettingsActivity"
+            android:label="@string/title_activity_account_settings"
             android:theme="@style/AppTheme.NoActionBar"/>
-
     </application>
 
 </manifest>

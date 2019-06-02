@@ -1,6 +1,7 @@
 package br.com.bittencourt.boni.lucas.blueshoes.data;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 
 import java.util.Arrays;
 import java.util.List;
@@ -9,6 +10,58 @@ import br.com.bittencourt.boni.lucas.blueshoes.R;
 import br.com.bittencourt.boni.lucas.blueshoes.domain.NavMenuItem;
 
 public class NavMenuItemsDataBase {
+
+
+    public static final String SP_NAME = "SP_NAV_MENU";
+    public static final String SP_ITEM_ID_KEY = "item-id";
+    public static final String SP_IS_ACTIVITY_KEY = "is-activity";
+
+
+    private SharedPreferences getSP(Context context) {
+        return context.getSharedPreferences(
+                SP_NAME,
+                Context.MODE_PRIVATE
+        );
+    }
+
+    /*
+     * Salva o ID do último item de menu selecionado que
+     * aciona um fragmento.
+     * */
+    public void saveLastSelectedItemFragmentID(Context context,Long itemID){
+        SharedPreferences sp = getSP( context );
+        sp.edit().putLong( SP_ITEM_ID_KEY, itemID ).apply();
+    }
+
+    /*
+     * Retorna o ID do último item de menu selecionado que
+     * aciona um fragmento.
+     * */
+    public Long getLastSelectedItemFragmentID(Context context)  {
+        SharedPreferences sp = getSP( context );
+        return sp.getLong( SP_ITEM_ID_KEY, 0 );
+    }
+
+    /*
+     * Salva se o último item de menu acionado foi ou não
+     * um item que aciona uma atividade.
+     * */
+    public void saveIsActivityItemFired(Context context, Boolean isActivity){
+        SharedPreferences sp = getSP( context );
+        sp.edit()
+                .putBoolean( SP_IS_ACTIVITY_KEY, isActivity )
+                .apply();
+    }
+
+    /*
+     * Informa se o último item de menu acionado foi ou não
+     * um item que aciona uma atividade.
+     * */
+    public Boolean wasActivityItemFired( Context context )  {
+        SharedPreferences sp = getSP( context );
+        return sp.getBoolean( SP_IS_ACTIVITY_KEY, false );
+    }
+
 
     //private Context context;
 

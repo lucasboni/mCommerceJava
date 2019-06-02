@@ -60,16 +60,17 @@ public class MainActivity extends AppCompatActivity
     private Button bt_login;
     private TextView tv_sign_up;
 
-
-
-    private User user = new User( "Lucas Boni", R.drawable.user,false);
+    private User user = new User( "Lucas Boni", R.drawable.user,true);
 
     private SelectionTracker<Long> selectNavMenuItems;
     private List<NavMenuItem> navMenuItems;
 
-
     private List<NavMenuItem> navMenuItemsLogged;
     private SelectionTracker<Long> selectNavMenuItemsLogged;
+
+
+    private NavMenuItemsDataBase navMenu;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -170,6 +171,22 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        /*
+         * Se o último item de menu gaveta selecionado foi um
+         * que aciona uma atividade, então temos de colocar a
+         * seleção de item correta em menu gaveta, item que
+         * estava selecionado antes do acionamento do item que
+         * invoca uma atividade.
+         * */
+        if( navMenu.wasActivityItemFired( this ) ){
+            selectNavMenuItems.select(
+                    navMenu.getLastSelectedItemFragmentID( this )
+            );
+        }
+    }
 
     private void fillUserHeaderNavMenu(){
         if( user.isStatus() ) { /* Conectado */
@@ -202,7 +219,10 @@ public class MainActivity extends AppCompatActivity
      * */
     private void initNavMenu(Bundle savedInstanceState ){
 
-        NavMenuItemsDataBase navMenu = new NavMenuItemsDataBase(this);//carrega a base de dados
+
+        navMenu = new NavMenuItemsDataBase(this);//carrega a base de dados
+
+
         navMenuItems = navMenu.getItems();//obtem os itens padroes
         navMenuItemsLogged = navMenu.getItemsLogged();//obtem os itens de ususario logado
 
@@ -410,6 +430,88 @@ public class MainActivity extends AppCompatActivity
     }
 
 
+    private void itemCallFragment(Long key ){
+        /*
+         * Para garantir que somente um item de lista se
+         * manterá selecionado, é preciso acessar o objeto
+         * de seleção da lista de itens de usuário conectado
+         * para então remover qualquer possível seleção
+         * ainda presente nela. Sempre haverá somente um
+         * item selecionado, mas infelizmente o método
+         * clearSelection() não estava respondendo como
+         * esperado, por isso a estratégia a seguir.
+         * */
+        //selectionTracker.clearSelection();//apaga todos os selecionados da outra lista
+        //callbackRemoveSelection()
+
+        navMenu.saveLastSelectedItemFragmentID( this, key );
+
+        if( !navMenu.wasActivityItemFired( this ) ){
+            /*
+             * Somente permiti a real seleção de um fragmento e o
+             * fechamento do menu gaveta se o item de menu anterior
+             * selecionado não tiver sido um que aciona uma atividade.
+             * Caso contrário o fragmento já em tela deve continuar
+             * e o menu gaveta deve permanecer aberto.
+             * */
+
+            Fragment fragment = getFragment( key );
+            replaceFragment( fragment );
+
+            /*
+             * Fechando o menu gaveta.
+             * */
+            drawer_layout.closeDrawer( GravityCompat.START );
+        }
+        else{
+            navMenu.saveIsActivityItemFired( this, false );
+        }
+    }
+
+    private void itemCallActivity(Long key){
+        //callbackRemoveSelection();
+
+        Intent intent = null;
+
+        for (NavMenuItem item:  navMenu.getItems()){
+            if(item.getId() == key){
+                return;
+            }
+        }
+
+
+        intent = new Intent(this, AccountSettingsActivity.class);
+        intent.putExtra( User.KEY, user );
+
+        navMenu.saveIsActivityItemFired( this, true );
+
+
+        if(intent != null) {
+            startActivity(intent);
+        }
+    }
+
+
+    /*
+     * Alguns itens do menu gaveta de usuário conectado acionam
+     * a abertura de uma atividade e não a abertura de um novo
+     * fragmento, dessa forma o método abaixo será útil em
+     * lógicas de negócio para informar quais são os itens que
+     * acionam atividades.
+     * */
+    private boolean isActivityCallInMenu(Long key ){
+        for (NavMenuItem item:  navMenu.getItems()) {
+            if (item.getId() == key) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+
+
+
     public class SelectObserverNavMenuItems extends SelectionTracker.SelectionObserver<Long>{
 
 
@@ -463,6 +565,16 @@ public class MainActivity extends AppCompatActivity
 
             selectionTracker.clearSelection();//apaga todos os selecionados da outra lista
 
+
+
+            if( isActivityCallInMenu( key ) ) {
+                itemCallActivity( key );
+            }
+            else {
+                itemCallFragment( key);
+            }
+
+
             /*for(long id:selectNavMenuItemsLogged.getSelection()){
                 selectNavMenuItemsLogged.deselect(id);
             }*/
@@ -474,8 +586,8 @@ public class MainActivity extends AppCompatActivity
              * */
 
 
-            Fragment fragment = getFragment( key );
-            replaceFragment( fragment );
+            //Fragment fragment = getFragment( key );
+            //replaceFragment( fragment );
 
 
             /*

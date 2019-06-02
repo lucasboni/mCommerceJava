@@ -183,7 +183,6 @@
     </string>
 
 
-
     <!-- SignUpActivity -->
     <string name="title_activity_sign_up">
         Cadastro
@@ -228,5 +227,6 @@
     <string name="setting_item_credit_cards_desc">
         Para adição e remoção de cartões de crédito.
     </string>
+
 
 </resources>
