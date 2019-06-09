@@ -4,9 +4,9 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.content.res.ResourcesCompat;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ImageSpan;
@@ -80,7 +80,7 @@ public class ForgotPasswordActivity extends FormActivity {
          * Acessando o TextView padrão do SnackBar para assim
          * colocarmos um ícone nele via objeto Spannable.
          * */
-        TextView textView = snackBar.getView().findViewById(android.support.design.R.id.snackbar_text);
+        TextView textView = snackBar.getView().findViewById(R.id.snackbar_text);
 
         /*
          * Criando o objeto Drawable que entrará como ícone

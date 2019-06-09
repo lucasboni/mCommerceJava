@@ -3,6 +3,7 @@ package br.com.bittencourt.boni.lucas.blueshoes.domain;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+//@Parcelize sópara kodlin
 public class User  implements Parcelable {
 
     public static String KEY = "user-key";

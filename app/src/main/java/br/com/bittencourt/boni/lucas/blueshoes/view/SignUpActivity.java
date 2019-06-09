@@ -1,9 +1,10 @@
 package br.com.bittencourt.boni.lucas.blueshoes.view;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
-import android.support.constraint.ConstraintSet;
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.ScreenUtils;
 
 import br.com.bittencourt.boni.lucas.blueshoes.R;
@@ -42,13 +44,13 @@ public class SignUpActivity extends FormEmailAndPasswordActivity {
          * Colocando configuração de validação de campo de email
          * para enquanto o usuário informa o conteúdo deste campo.
          * */
-        extension_functions.isValidPassword(et_email,getString(R.string.invalid_email));
+        extension_functions.isValidPassword(et_email, getString(R.string.invalid_email));
 
         /*
          * Colocando configuração de validação de campo de senha
          * para enquanto o usuário informa o conteúdo deste campo.
          * */
-        extension_functions.isValidPassword(et_password,getString(R.string.invalid_password));
+        extension_functions.isValidPassword(et_password, getString(R.string.invalid_password));
 
         /*
          * Colocando configuração de validação de campo de
@@ -63,8 +65,8 @@ public class SignUpActivity extends FormEmailAndPasswordActivity {
                  * necessário, caso contrário a validação falha
                  * mesmo quando é para ser ok.
                  * */
-                if(!this.equals( et_password.getText().toString() )){
-                    et_confirm_password.setError(getString(R.string.invalid_confirmed_password ));
+                if (!this.equals(et_password.getText().toString())) {
+                    et_confirm_password.setError(getString(R.string.invalid_confirmed_password));
                 }
             }
 
@@ -78,7 +80,6 @@ public class SignUpActivity extends FormEmailAndPasswordActivity {
 
             }
         });
-
 
 
     }
@@ -104,10 +105,10 @@ public class SignUpActivity extends FormEmailAndPasswordActivity {
 
     @Override
     void isMainButtonSending(Boolean status) {
-        if( status )
-            bt_sign_up.setText(getString( R.string.sign_up_going ));
+        if (status)
+            bt_sign_up.setText(getString(R.string.sign_up_going));
         else
-            bt_sign_up.setText(getString( R.string.sign_up ));
+            bt_sign_up.setText(getString(R.string.sign_up));
     }
 
     @Override
@@ -132,7 +133,16 @@ public class SignUpActivity extends FormEmailAndPasswordActivity {
     }
 
 
-    void callLoginActivity(View view  ){
-        finish();
+    void callLoginActivity(View view) {
+        /*
+         * Para evitar que tenhamos mais de uma
+         * LoginActivity na pilha de atividades.
+         * */
+        if (ActivityUtils.isActivityExistsInStack(LoginActivity.class)) {//verifica se existe na pilha a tela de login
+            finish();
+        } else {
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+        }
     }
 }

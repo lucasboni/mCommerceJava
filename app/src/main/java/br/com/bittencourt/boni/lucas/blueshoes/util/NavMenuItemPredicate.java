@@ -1,6 +1,6 @@
 package br.com.bittencourt.boni.lucas.blueshoes.util;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import androidx.recyclerview.selection.SelectionTracker;
 import br.com.bittencourt.boni.lucas.blueshoes.view.MainActivity;

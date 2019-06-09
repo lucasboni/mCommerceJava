@@ -5,11 +5,11 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
-import android.support.constraint.ConstraintSet;
-import android.support.design.widget.Snackbar;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.content.res.ResourcesCompat;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ImageSpan;
@@ -21,6 +21,7 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.ScreenUtils;
 
 import br.com.bittencourt.boni.lucas.blueshoes.R;
@@ -141,7 +142,7 @@ public class LoginActivity extends FormEmailAndPasswordActivity {
          * Acessando o TextView padrão do SnackBar para assim
          * colocarmos um ícone nele via objeto Spannable.
          * */
-        TextView textView = snackBar.getView().findViewById(android.support.design.R.id.snackbar_text);
+        TextView textView = snackBar.getView().findViewById(R.id.snackbar_text);
 
         /*
          * Criando o objeto Drawable que entrará como ícone
@@ -209,9 +210,17 @@ public class LoginActivity extends FormEmailAndPasswordActivity {
         startActivity(intent);
     }
 
-    private void callSignUpActivity(View view){
-        Intent intent = new Intent(this,SignUpActivity.class);
-        startActivity(intent);
+    private void callSignUpActivity(View view) {
+        /*
+         * Para evitar que tenhamos mais de uma
+         * SignUpActivity na pilha de atividades.
+         * */
+        if (ActivityUtils.isActivityExistsInStack(SignUpActivity.class)) {
+            finish();
+        } else {
+            Intent intent = new Intent(this, SignUpActivity.class);
+            startActivity(intent);
+        }
     }
 
     @Override
