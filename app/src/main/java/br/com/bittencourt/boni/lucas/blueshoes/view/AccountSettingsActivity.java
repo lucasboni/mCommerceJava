@@ -1,5 +1,6 @@
 package br.com.bittencourt.boni.lucas.blueshoes.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import br.com.bittencourt.boni.lucas.blueshoes.R;
@@ -19,6 +21,9 @@ public class AccountSettingsActivity extends AppCompatActivity {
 
     private RecyclerView rv_account_settings_items;
     private TextView tv_user_connected;
+
+
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +40,7 @@ public class AccountSettingsActivity extends AppCompatActivity {
          * Colocando em tela o usuário conectado.
          * */
 
-        User user = getIntent().getParcelableExtra(User.KEY);
+        user = getIntent().getParcelableExtra(User.KEY);
         tv_user_connected.setText(String.format(
                 "%s %s",
                 getString(R.string.connected),
@@ -44,7 +49,6 @@ public class AccountSettingsActivity extends AppCompatActivity {
 
 
         initItems();
-
 
     }
 
@@ -86,4 +90,13 @@ public class AccountSettingsActivity extends AppCompatActivity {
                 AccountSettingsItemsDataBase.getItems( this )
         ));
     }
+
+
+    public User getUser() {
+        return user;
+    }
+
+
+
+
 }

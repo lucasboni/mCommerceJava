@@ -2,6 +2,8 @@ package br.com.bittencourt.boni.lucas.blueshoes.view;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,7 @@ import java.util.List;
 
 import br.com.bittencourt.boni.lucas.blueshoes.R;
 import br.com.bittencourt.boni.lucas.blueshoes.domain.AccountSettingItem;
+import br.com.bittencourt.boni.lucas.blueshoes.domain.User;
 
 public class AccountSettingsItemsAdapter extends RecyclerView.Adapter<AccountSettingsItemsAdapter.ViewHolder>{
 
@@ -44,7 +47,7 @@ public class AccountSettingsItemsAdapter extends RecyclerView.Adapter<AccountSet
         return items.size();
     }
 
-    protected class ViewHolder extends RecyclerView.ViewHolder{
+    protected class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         private TextView tvLabel;
         private TextView tvDescription;
@@ -53,11 +56,28 @@ public class AccountSettingsItemsAdapter extends RecyclerView.Adapter<AccountSet
             super(itemView);
             tvLabel = itemView.findViewById( R.id.tv_label );
             tvDescription = itemView.findViewById( R.id.tv_description );
+            itemView.setOnClickListener( this );
         }
 
         protected void setData(AccountSettingItem item){
             tvLabel.setText(item.getLabel());
             tvDescription.setText(item.getDescription());
         }
+
+        @Override
+        public void onClick(View view) {
+            AccountSettingsActivity activity = (AccountSettingsActivity)view.getContext();
+            User user = activity.getUser();
+            Intent intent = new Intent(
+                    activity,
+                    items.get(getAdapterPosition()).getActivityClass()
+            );
+
+            intent.putExtra(User.KEY, user );
+            activity.startActivity( intent );
+        }
     }
+
+
+
 }

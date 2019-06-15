@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity
     private Button bt_login;
     private TextView tv_sign_up;
 
-    private User user = new User( "Lucas Boni", R.drawable.user,false);
+    private User user = new User( "Lucas Boni", R.drawable.user,true);
 
     private SelectionTracker<Long> selectNavMenuItems;
     private List<NavMenuItem> navMenuItems;
