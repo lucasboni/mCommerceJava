@@ -18,7 +18,9 @@ allprojects {
     repositories {
         google()
         jcenter()
-        
+        mavenCentral() /* Para acesso a API RoundedImageView */
+        maven { url "https://maven.google.com" }
+        maven { url "https://jitpack.io" }
     }
 }
 

@@ -4,6 +4,12 @@
     android:shape="rectangle">
 
     <!--
+        Se o background transparente não for definido, o fundo
+        do shape, em versões antigas do Android, ficará preto.
+    -->
+    <solid android:color="@android:color/transparent" />
+
+    <!--
         Definindo bordas de 1dp de espessura e na cor laranja.
     -->
     <stroke

@@ -1,27 +1,37 @@
 package br.com.bittencourt.boni.lucas.blueshoes.view;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 
+import com.blankj.utilcode.util.ColorUtils;
 import com.blankj.utilcode.util.KeyboardUtils;
 import com.blankj.utilcode.util.ScreenUtils;
+import com.makeramen.roundedimageview.RoundedImageView;
+import com.nguyenhoanglam.imagepicker.model.Config;
+import com.nguyenhoanglam.imagepicker.model.Image;
+import com.nguyenhoanglam.imagepicker.ui.imagepicker.ImagePicker;
 
 import br.com.bittencourt.boni.lucas.blueshoes.R;
 import br.com.bittencourt.boni.lucas.blueshoes.domain.User;
 
+import java.util.ArrayList;
+
 public class ConfigProfileActivity extends FormActivity implements KeyboardUtils.OnSoftInputChangedListener {
 
     private EditText et_name;
-    private ImageView iv_profile;
+    private RoundedImageView riv_profile;
     private Button bt_send_profile;
     private TextView tv_name;
 
@@ -30,9 +40,12 @@ public class ConfigProfileActivity extends FormActivity implements KeyboardUtils
         super.onCreate(savedInstanceState);
 
         et_name = findViewById(R.id.et_name);
-        iv_profile =findViewById(R.id.iv_profile);
+        riv_profile =findViewById(R.id.riv_profile);
         bt_send_profile =findViewById(R.id.bt_send_profile);
         tv_name =findViewById(R.id.tv_name);
+
+
+
 
 
         //et_name.setOnEditorActionListener(this);
@@ -49,9 +62,10 @@ public class ConfigProfileActivity extends FormActivity implements KeyboardUtils
             } else {
                 et_name.setText(getString(R.string.invalid_name));
             }
+            if(user.getImage() == null){
+                riv_profile.setImageResource( R.drawable.profile_hint);
+            }
         }
-
-
 
         KeyboardUtils.registerSoftInputChangedListener(this,this);
     }
@@ -74,7 +88,8 @@ public class ConfigProfileActivity extends FormActivity implements KeyboardUtils
 
     @Override
     void blockFields(Boolean status) {
-        iv_profile.setEnabled(!status);
+        riv_profile.setEnabled(!status);
+        //iv_profile.setEnabled(!status);
         et_name.setEnabled(!status);
         bt_send_profile.setEnabled(!status);
     }
@@ -91,10 +106,67 @@ public class ConfigProfileActivity extends FormActivity implements KeyboardUtils
     }
 
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+
+        if( requestCode == com.nguyenhoanglam.imagepicker.model.Config.RC_PICK_IMAGES
+                && resultCode == Activity.RESULT_OK
+                && data != null ){
+
+            ArrayList<Image> images = data.getParcelableArrayListExtra( com.nguyenhoanglam.imagepicker.model.Config.EXTRA_IMAGES);
+
+            if( !images.isEmpty() ){
+                riv_profile.setImageURI(
+                        Uri.parse( images.get(0).getPath() )
+                );
+            }
+        }
+
+        /*
+         * Note que em nossa lógica de negócio, se não houver imagem
+         * selecionada, o que estiver atualmente presente como imagem
+         * de perfil continua sendo a imagem de perfil.
+         * */
+
+        /*
+         * A invocação a super.onActivityResult() tem que
+         * vir após a verificação / obtenção da imagem.
+         * */
+
+
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
     void callGallery(View view){
-        Toast
-                .makeText( this, "TODO", Toast.LENGTH_SHORT )
-                .show();
+        String colorPrimary = ColorUtils.int2ArgbString(
+                ColorUtils.getColor(R.color.colorPrimary)
+        );
+        String colorPrimaryDark = ColorUtils.int2ArgbString(
+                ColorUtils.getColor(R.color.colorPrimaryDark)
+        );
+        String colorText = ColorUtils.int2ArgbString(
+                ColorUtils.getColor(R.color.colorText)
+        );
+        String colorWhite = ColorUtils.int2ArgbString(
+                Color.WHITE
+        );
+
+        ImagePicker
+                .with( this ) /* Inicializa a ImagePicker API com um context (Activity ou Fragment) */
+                .setToolbarColor( colorPrimary )
+                .setStatusBarColor( colorPrimaryDark )
+                .setToolbarTextColor( colorText )
+                .setToolbarIconColor( colorText )
+                .setProgressBarColor( colorPrimaryDark )
+                .setBackgroundColor( colorWhite )
+                .setMultipleMode( false )
+                .setFolderMode( true )
+                .setShowCamera( true )
+                .setFolderTitle( getString(R.string.imagepicker_gallery_activity) ) /* Nome da tela de galeria da ImagePicker API (funciona quando FolderMode = true). */
+                .setLimitMessage( getString(R.string.imagepicker_selection_limit) )
+                .setSavePath( getString(R.string.imagepicker_cam_photos_activity) ) /* Folder das imagens de câmera, tiradas a partir da ImagePicker API. */
+                .setKeepScreenOn( true ) /* Mantém a tela acionada enquanto a galeria estiver aberta. */
+                .start();
     }
 
     @Override
@@ -111,8 +183,8 @@ public class ConfigProfileActivity extends FormActivity implements KeyboardUtils
 
     private void changeTargetViewConstraints( Boolean isKeyBoardOpened ){
 
-        int photoProfileId = iv_profile.getId();
-        ConstraintLayout parent = (ConstraintLayout)iv_profile.getParent();
+        int photoProfileId = riv_profile.getId();
+        ConstraintLayout parent = (ConstraintLayout)riv_profile.getParent();
         ConstraintSet constraintSet = new ConstraintSet();
         int size = (int)(108 * ScreenUtils.getScreenDensity());
 
@@ -167,4 +239,7 @@ public class ConfigProfileActivity extends FormActivity implements KeyboardUtils
                 (int)(30 * ScreenUtils.getScreenDensity())
         );
     }
+
+
+
 }

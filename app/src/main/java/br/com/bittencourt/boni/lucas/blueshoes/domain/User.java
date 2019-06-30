@@ -9,10 +9,10 @@ public class User  implements Parcelable {
     public static String KEY = "user-key";
 
     private String name;
-    private int image;
+    private Integer image;
     boolean status;
 
-    public User(String name, int image, boolean status) {
+    public User(String name, Integer image, boolean status) {
         this.name = name;
         this.image = image;
         this.status = status;
@@ -52,7 +52,7 @@ public class User  implements Parcelable {
         return name;
     }
 
-    public int getImage() {
+    public Integer getImage() {
         return image;
     }
 
