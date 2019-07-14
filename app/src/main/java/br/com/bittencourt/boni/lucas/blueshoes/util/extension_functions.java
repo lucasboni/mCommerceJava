@@ -11,6 +11,10 @@ import br.com.bittencourt.boni.lucas.blueshoes.R;
 
 public class extension_functions {
 
+    public static void isGernicValidation(EditText editText,Validater validater,String msg){
+        editText.addTextChangedListener(isValid(editText,validater,msg));
+    }
+
     public static void isValidEmail(EditText editText,String msg){
         editText.addTextChangedListener(isValid(editText,_isValidEmail(),msg));
     }
@@ -60,7 +64,7 @@ public class extension_functions {
     }
 
 
-    private interface Validater{
+    public interface Validater{
         boolean validar(CharSequence content);
     }
 

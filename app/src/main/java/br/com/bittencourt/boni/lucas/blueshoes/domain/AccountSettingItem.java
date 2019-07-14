@@ -5,7 +5,7 @@ import br.com.bittencourt.boni.lucas.blueshoes.view.FormActivity;
 public class AccountSettingItem {
     private String label;
     private String description;
-    Class activityClass;
+    private Class activityClass;
 
 
     /*public AccountSettingItem(String label, String description) {
