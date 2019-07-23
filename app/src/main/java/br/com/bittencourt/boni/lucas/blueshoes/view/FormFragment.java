@@ -16,6 +16,7 @@ import android.os.SystemClock;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ImageSpan;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,6 +35,7 @@ abstract public class FormFragment extends Fragment implements TextView.OnEditor
 
     private FrameLayout fl_proxy_container;
     private ViewGroup containerForm;
+    private FrameLayout fl_form;
 
     @Nullable
     @Override
@@ -56,6 +58,7 @@ abstract public class FormFragment extends Fragment implements TextView.OnEditor
         );
 
 
+        fl_form = viewContainer.findViewById(R.id.fl_form);
         fl_proxy_container = viewContainer.findViewById(R.id.fl_proxy_container);
         containerForm = (ViewGroup) fl_proxy_container.getParent();
 
@@ -233,7 +236,7 @@ abstract public class FormFragment extends Fragment implements TextView.OnEditor
      * alguns formulários críticos onde parte da validação é a
      * verificação da senha.
      * */
-    protected void callPasswordDialog() {
+    public void callPasswordDialog() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
@@ -305,6 +308,24 @@ abstract public class FormFragment extends Fragment implements TextView.OnEditor
 
 
         dialog.show();
+    }
+
+
+    /*
+     * Método necessário para atualizar o ViewGroup
+     * fl_form, que é container dos layouts de formulários
+     * carregados em fragment_form, deixando ele
+     * pronto para receber uma lista de itens ou formulários
+     * que têm os próprios padding e posicionamento.
+     * */
+    protected void updateFlFormToFullFreeScreen(){
+
+        fl_form.setPadding( 0,0,0,0 );
+
+        FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams)fl_form.getLayoutParams();
+        layoutParams.gravity = Gravity.NO_GRAVITY;
+        layoutParams.width = FrameLayout.LayoutParams.MATCH_PARENT;
+        layoutParams.height = FrameLayout.LayoutParams.MATCH_PARENT;
     }
 
 }
