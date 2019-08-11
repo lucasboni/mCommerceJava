@@ -175,7 +175,7 @@ abstract public class FormFragment extends Fragment implements TextView.OnEditor
      * de dados. Algoritmo vinculado ao menos ao principal
      * botão em tela.
      * */
-    void mainAction() {
+    protected void mainAction() {
         blockFields(true);
         isMainButtonSending(true);
         showProxy(true);
