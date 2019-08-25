@@ -228,4 +228,8 @@ public class LoginActivity extends FormEmailAndPasswordActivity {
         return ScreenUtils.isPortrait();
     }
 
+    /*@Override
+    public void mainAction(View view) {
+        super.mainAction(view);
+    }*/
 }

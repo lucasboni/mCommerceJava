@@ -166,7 +166,7 @@ public abstract class FormActivity extends AppCompatActivity {
      * de dados. Algoritmo vinculado ao menos ao principal
      * botão em tela.
      * */
-    void mainAction(View view) {
+    public void mainAction(View view) {
         blockFields(true);
         isMainButtonSending(true);
         showProxy(true);
