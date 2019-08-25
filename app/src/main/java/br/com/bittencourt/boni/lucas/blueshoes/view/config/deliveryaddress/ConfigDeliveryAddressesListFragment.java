@@ -85,7 +85,7 @@ public class ConfigDeliveryAddressesListFragment extends FormFragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         rv_delivery_addresses.setLayoutManager(layoutManager);
 
-        ConfigDeliveryAddressesListItemsAdapter adapter = new ConfigDeliveryAddressesListItemsAdapter(
+        RecyclerView.Adapter adapter = new ConfigDeliveryAddressesListItemsAdapter(
                 DeliveryAddressesDataBase.getItems(), this);
         adapter.registerAdapterDataObserver(new RecyclerViewObserver());
         rv_delivery_addresses.setAdapter(adapter);

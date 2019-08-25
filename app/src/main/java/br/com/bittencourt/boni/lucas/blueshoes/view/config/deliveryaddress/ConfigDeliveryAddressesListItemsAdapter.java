@@ -170,7 +170,7 @@ public class ConfigDeliveryAddressesListItemsAdapter extends RecyclerView.Adapte
 
             FragmentTransaction transaction = fragment
                     .getFragmentManager()
-        .beginTransaction();
+                    .beginTransaction();
 
             /*
              * O acesso ao FrameLayout root volta a ocorrer para que
