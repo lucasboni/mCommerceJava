@@ -13,10 +13,11 @@ import androidx.annotation.Nullable;
 
 import br.com.bittencourt.boni.lucas.blueshoes.R;
 import br.com.bittencourt.boni.lucas.blueshoes.view.FormFragment;
+import br.com.bittencourt.boni.lucas.blueshoes.view.config.ConfigFormFragment;
 
-public class ConfigNewDeliveryAddressFragment extends FormFragment {
+public class FormNewDeliveryAddressFragment extends ConfigFormFragment {
 
-    public final static int TAB_TITLE = R.string.config_delivery_address_tab_new;
+    //public final static int TAB_TITLE = R.string.config_delivery_address_tab_new;
 
     /*
      * A constante abaixo representa a posição
@@ -109,5 +110,10 @@ public class ConfigNewDeliveryAddressFragment extends FormFragment {
             bt_nu_address.setText(getString( R.string.add_delivery_address_going));
         else
             bt_nu_address.setText(getString( R.string.add_delivery_address));
+    }
+
+    @Override
+    public int title() {
+        return R.string.config_delivery_address_tab_new;
     }
 }

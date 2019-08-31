@@ -12,26 +12,25 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import br.com.bittencourt.boni.lucas.blueshoes.R;
 import br.com.bittencourt.boni.lucas.blueshoes.domain.DeliveryAddress;
-import br.com.bittencourt.boni.lucas.blueshoes.view.config.creditcard.UpdateScreamCallback;
+import br.com.bittencourt.boni.lucas.blueshoes.view.config.UpdateScreamCallback;
 
-public class ConfigDeliveryAddressesListItemsAdapter extends RecyclerView.Adapter<ConfigDeliveryAddressesListItemsAdapter.ViewHolder> {
+public class DeliveryAddressesListItemsAdapter extends RecyclerView.Adapter<DeliveryAddressesListItemsAdapter.ViewHolder> {
 
     private List<DeliveryAddress> items;
-    private ConfigDeliveryAddressesListFragment fragment;
+    private DeliveryAddressesListFragment fragment;
 
-    public ConfigDeliveryAddressesListItemsAdapter(List<DeliveryAddress> items, ConfigDeliveryAddressesListFragment fragment) {
+    public DeliveryAddressesListItemsAdapter(List<DeliveryAddress> items, DeliveryAddressesListFragment fragment) {
         this.items = items;
         this.fragment = fragment;
     }
 
     @NonNull
     @Override
-    public ConfigDeliveryAddressesListItemsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public DeliveryAddressesListItemsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View layout = LayoutInflater
                 .from(parent.getContext())
@@ -45,7 +44,7 @@ public class ConfigDeliveryAddressesListItemsAdapter extends RecyclerView.Adapte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ConfigDeliveryAddressesListItemsAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull DeliveryAddressesListItemsAdapter.ViewHolder holder, int position) {
         holder.setData(items.get(position));
     }
 
@@ -155,7 +154,7 @@ public class ConfigDeliveryAddressesListItemsAdapter extends RecyclerView.Adapte
 
         private void toUpdate( Integer position ){
 
-            Fragment updateFrag = new ConfigUpdateDeliveryAddressFragment();
+            Fragment updateFrag = new UpdateDeliveryAddressFragmentForm();
 
             /*
              * Colocando como dado de transição o item selecionado para

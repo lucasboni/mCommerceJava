@@ -14,39 +14,42 @@ import androidx.recyclerview.widget.RecyclerView;
 import br.com.bittencourt.boni.lucas.blueshoes.R;
 import br.com.bittencourt.boni.lucas.blueshoes.data.CreditCardsDataBase;
 import br.com.bittencourt.boni.lucas.blueshoes.view.FormFragment;
+import br.com.bittencourt.boni.lucas.blueshoes.view.config.ConfigListFragment;
+import br.com.bittencourt.boni.lucas.blueshoes.view.config.UpdateScreamCallback;
 
-public class ConfigCreditCardsListFragment extends FormFragment {
+public class CreditCardsListFragment extends ConfigListFragment {
 
-    public static final int TAB_TITLE = R.string.config_credit_cards_tab_list;
 
-    private UpdateScreamCallback callbackMainButtonUpdate;
+    /*private UpdateScreamCallback callbackMainButtonUpdate;
     private UpdateScreamCallback callbackBlockFields ;
     private UpdateScreamCallback callbackRemoveItem ;
 
 
-    private RecyclerView rv_credit_cards;
-    private TextView tv_empty_list;
+    private RecyclerView rv_credit_cards;*/
+    //private TextView tv_empty_list;
 
-    @Nullable
+    /*@Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = super.onCreateView(inflater, container, savedInstanceState);
-        rv_credit_cards = view.findViewById(R.id.rv_credit_cards);
-        tv_empty_list = view.findViewById(R.id.tv_empty_list);
+        //rv_credit_cards = view.findViewById(R.id.rv_credit_cards);
+        //tv_empty_list = view.findViewById(R.id.tv_empty_list);
+
         return view;
-    }
+    }*/
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        updateFlFormToFullFreeScreen();
-        initItems();
+        tv_empty_list.setText( R.string.credit_card_list_empty );
+        ///updateFlFormToFullFreeScreen();
+        //initItems();
     }
 
-    @Override
+    /*@Override
     public int getLayoutResourceID() {
         return R.layout.fragment_config_credit_cards_list;
-    }
+    }*/
 
     @Override
     public void backEndFakeDelay() {
@@ -56,7 +59,7 @@ public class ConfigCreditCardsListFragment extends FormFragment {
         );
     }
 
-    @Override
+   /* @Override
     public void blockFields(Boolean status) {
         callbackBlockFields.action(status);
     }
@@ -65,35 +68,44 @@ public class ConfigCreditCardsListFragment extends FormFragment {
     public void isMainButtonSending(Boolean status) {
         callbackMainButtonUpdate.action(status);
         callbackRemoveItem.action(status);
-    }
+    }*/
 
 
     /*
      * Método que inicializa a lista de cartões de crédito.
      * */
-    private void initItems(){
+    /*private void initItems(){
         rv_credit_cards.setHasFixedSize( false );
 
         LinearLayoutManager layoutManager = new LinearLayoutManager( getActivity() );
         rv_credit_cards.setLayoutManager(layoutManager);
 
-        ConfigCreditCardsListItemsAdapter adapter = new ConfigCreditCardsListItemsAdapter(
+        CreditCardsListItemsAdapter adapter = new CreditCardsListItemsAdapter(
                 this,
                 CreditCardsDataBase.getItems()
         );
         adapter.registerAdapterDataObserver(new RecyclerViewObserver());
         rv_credit_cards.setAdapter(adapter);
+    }*/
+
+    @Override
+    protected RecyclerView.Adapter getRecyclerViewAdapter() {
+        return new CreditCardsListItemsAdapter(this,  CreditCardsDataBase.getItems());
     }
 
 
-    public void callbacksToUpdateItem(UpdateScreamCallback callbackMainButtonUpdate,
+    /*public void callbacksToUpdateItem(UpdateScreamCallback callbackMainButtonUpdate,
                                       UpdateScreamCallback callbackBlockFields,
                                       UpdateScreamCallback callbackRemoveItem) {
         this.callbackMainButtonUpdate = callbackMainButtonUpdate;
         this.callbackBlockFields = callbackBlockFields;
         this.callbackRemoveItem = callbackRemoveItem;
-    }
+    }*/
 
+    @Override
+    public int title() {
+        return R.string.config_credit_cards_tab_list;
+    }
 
 
     /*
@@ -103,7 +115,7 @@ public class ConfigCreditCardsListFragment extends FormFragment {
      * podemos apresentar uma mensagem ao usuário informando
      * sobre a lista vazia.
      * */
-    public class RecyclerViewObserver extends RecyclerView.AdapterDataObserver {
+    /*public class RecyclerViewObserver extends RecyclerView.AdapterDataObserver {
 
         @Override
         public void onItemRangeRemoved(int positionStart, int itemCount) {
@@ -115,6 +127,6 @@ public class ConfigCreditCardsListFragment extends FormFragment {
                 tv_empty_list.setVisibility(View.GONE);
             }
         }
-    }
+    }*/
 
 }

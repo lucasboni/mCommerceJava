@@ -14,7 +14,7 @@ import androidx.annotation.Nullable;
 import br.com.bittencourt.boni.lucas.blueshoes.R;
 import br.com.bittencourt.boni.lucas.blueshoes.domain.DeliveryAddress;
 
-public class ConfigUpdateDeliveryAddressFragment extends ConfigNewDeliveryAddressFragment {
+public class UpdateDeliveryAddressFragmentForm extends FormNewDeliveryAddressFragment {
 
     private Button bt_nu_address;
     private EditText et_street;

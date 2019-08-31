@@ -15,11 +15,12 @@ import androidx.annotation.StringRes;
 import br.com.bittencourt.boni.lucas.blueshoes.R;
 import br.com.bittencourt.boni.lucas.blueshoes.util.extension_functions;
 import br.com.bittencourt.boni.lucas.blueshoes.view.FormFragment;
+import br.com.bittencourt.boni.lucas.blueshoes.view.config.ConfigFormFragment;
 
-public class ConfigPasswordFragment extends FormFragment {
+public class FormPasswordFragment extends ConfigFormFragment {
 
     //public static final String TAB_TITLE = Resources.getSystem().getString(R.string.config_connection_data_tab_password);//nao funcionou
-    public static final String TAB_TITLE ="SENHA";
+    //public static final String TAB_TITLE ="SENHA";
 
     private EditText et_new_password;
     private EditText et_new_password_confirm;
@@ -100,4 +101,8 @@ public class ConfigPasswordFragment extends FormFragment {
             bt_update_password.setText(getString( R.string.update_password ));
     }
 
+    @Override
+    public int title() {
+        return R.string.config_connection_data_tab_password;
+    }
 }

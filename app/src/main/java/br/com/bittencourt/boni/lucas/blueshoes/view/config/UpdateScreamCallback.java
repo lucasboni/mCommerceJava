@@ -1,4 +1,4 @@
-package br.com.bittencourt.boni.lucas.blueshoes.view.config.creditcard;
+package br.com.bittencourt.boni.lucas.blueshoes.view.config;
 
 public interface UpdateScreamCallback {
 

@@ -1,4 +1,4 @@
-package br.com.bittencourt.boni.lucas.blueshoes.view;
+package br.com.bittencourt.boni.lucas.blueshoes.view.config.profile;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -25,10 +25,11 @@ import com.nguyenhoanglam.imagepicker.ui.imagepicker.ImagePicker;
 
 import br.com.bittencourt.boni.lucas.blueshoes.R;
 import br.com.bittencourt.boni.lucas.blueshoes.domain.User;
+import br.com.bittencourt.boni.lucas.blueshoes.view.FormActivity;
 
 import java.util.ArrayList;
 
-public class ConfigProfileActivity extends FormActivity implements KeyboardUtils.OnSoftInputChangedListener {
+public class ConfigActivity extends FormActivity implements KeyboardUtils.OnSoftInputChangedListener {
 
     private EditText et_name;
     private RoundedImageView riv_profile;
@@ -82,12 +83,12 @@ public class ConfigProfileActivity extends FormActivity implements KeyboardUtils
     }
 
     @Override
-    void backEndFakeDelay() {
+    public void backEndFakeDelay() {
         backEndFakeDelay(false,getString( R.string.invalid_config_profile));
     }
 
     @Override
-    void blockFields(Boolean status) {
+    public void blockFields(Boolean status) {
         riv_profile.setEnabled(!status);
         //iv_profile.setEnabled(!status);
         et_name.setEnabled(!status);
@@ -95,7 +96,7 @@ public class ConfigProfileActivity extends FormActivity implements KeyboardUtils
     }
 
     @Override
-    void isMainButtonSending(Boolean status) {
+    protected void isMainButtonSending(Boolean status) {
         String msg;
         if( status )
             msg = getString( R.string.config_profile_going );

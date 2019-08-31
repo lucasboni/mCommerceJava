@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import br.com.bittencourt.boni.lucas.blueshoes.R;
+import br.com.bittencourt.boni.lucas.blueshoes.view.config.ConfigFormFragment;
 
 /*
  * Fragmento com responsabilidade de ser o fragmento
@@ -18,7 +19,7 @@ import br.com.bittencourt.boni.lucas.blueshoes.R;
  * fácil alternância de fragmentos dentro de uma mesma
  * tela de ViewPager.
  * */
-public class ConfigDeliveryAddressHostFragment extends Fragment {
+public class DeliveryAddressHostFragment extends ConfigFormFragment {
 
 
     @Nullable
@@ -55,12 +56,37 @@ public class ConfigDeliveryAddressHostFragment extends Fragment {
             transaction
                     .replace(
                             R.id.fl_root,
-                            new ConfigDeliveryAddressesListFragment()
+                            new DeliveryAddressesListFragment()
                     )
                     .commit();
         }
 
         return view;
 
+    }
+
+    @Override
+    public int getLayoutResourceID() {
+        return 0;
+    }
+
+    @Override
+    public void backEndFakeDelay() {
+
+    }
+
+    @Override
+    public void blockFields(Boolean status) {
+
+    }
+
+    @Override
+    public void isMainButtonSending(Boolean status) {
+
+    }
+
+    @Override
+    public int title() {
+        return DeliveryAddressesListFragment.TAB_TITLE;
     }
 }

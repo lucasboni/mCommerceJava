@@ -1,6 +1,5 @@
-package br.com.bittencourt.boni.lucas.blueshoes.view;
+package br.com.bittencourt.boni.lucas.blueshoes.view.config.profile;
 
-import android.content.Intent;
 import android.os.Bundle;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,7 +8,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 
 import br.com.bittencourt.boni.lucas.blueshoes.R;

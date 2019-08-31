@@ -16,10 +16,11 @@ import com.santalu.maskedittext.MaskEditText;
 import br.com.bittencourt.boni.lucas.blueshoes.R;
 import br.com.bittencourt.boni.lucas.blueshoes.util.extension_functions;
 import br.com.bittencourt.boni.lucas.blueshoes.view.FormFragment;
+import br.com.bittencourt.boni.lucas.blueshoes.view.config.ConfigFormFragment;
 
-public class ConfigNewCreditCardFragment extends FormFragment implements View.OnFocusChangeListener {
+public class FormCreditCardFragment extends ConfigFormFragment implements View.OnFocusChangeListener {
 
-    public static final int TAB_TITLE = R.string.config_credit_cards_tab_new;
+    //public static final int TAB_TITLE = R.string.config_credit_cards_tab_new;
 
     private Button bt_add_credit_card;
     private EditText et_credit_card_security_code;
@@ -135,5 +136,10 @@ public class ConfigNewCreditCardFragment extends FormFragment implements View.On
          * forçar uma atualização no campo.
          * */
         editText.setText( content );
+    }
+
+    @Override
+    public int title() {
+        return R.string.config_credit_cards_tab_new;
     }
 }

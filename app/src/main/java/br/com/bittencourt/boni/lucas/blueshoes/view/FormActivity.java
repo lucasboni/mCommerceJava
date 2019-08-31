@@ -182,19 +182,19 @@ public abstract class FormActivity extends AppCompatActivity {
     /*
      * Método único.
      * */
-    abstract void backEndFakeDelay();
+    public abstract void backEndFakeDelay();
 
     /*
      * Necessário para que os campos de formulário não possam
      * ser acionados depois de enviados os dados.
      * */
-    abstract void blockFields(Boolean status  );
+    public abstract void blockFields(Boolean status);
 
     /*
      * Muda o rótulo do botão principal de acordo com o status
      * do envio de dados.
      * */
-    abstract void isMainButtonSending( Boolean status );
+    protected abstract void isMainButtonSending(Boolean status);
 
 
     @Override

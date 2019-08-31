@@ -13,20 +13,21 @@ import java.util.List;
 
 import br.com.bittencourt.boni.lucas.blueshoes.R;
 import br.com.bittencourt.boni.lucas.blueshoes.domain.CreditCard;
+import br.com.bittencourt.boni.lucas.blueshoes.view.config.UpdateScreamCallback;
 
-public class ConfigCreditCardsListItemsAdapter extends RecyclerView.Adapter<ConfigCreditCardsListItemsAdapter.ViewHolder> {
+public class CreditCardsListItemsAdapter extends RecyclerView.Adapter<CreditCardsListItemsAdapter.ViewHolder> {
 
     private List<CreditCard> items;
-    private ConfigCreditCardsListFragment fragment;
+    private CreditCardsListFragment fragment;
 
-    public ConfigCreditCardsListItemsAdapter(ConfigCreditCardsListFragment fragment,List<CreditCard> items) {
+    public CreditCardsListItemsAdapter(CreditCardsListFragment fragment, List<CreditCard> items) {
         this.fragment = fragment;
         this.items = items;
     }
 
     @NonNull
     @Override
-    public ConfigCreditCardsListItemsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CreditCardsListItemsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View layout = LayoutInflater
                 .from( parent.getContext() )
                 .inflate(
@@ -39,7 +40,7 @@ public class ConfigCreditCardsListItemsAdapter extends RecyclerView.Adapter<Conf
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ConfigCreditCardsListItemsAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CreditCardsListItemsAdapter.ViewHolder holder, int position) {
         holder.setData(items.get(position));
     }
 

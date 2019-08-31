@@ -14,11 +14,12 @@ import androidx.annotation.Nullable;
 import br.com.bittencourt.boni.lucas.blueshoes.R;
 import br.com.bittencourt.boni.lucas.blueshoes.util.extension_functions;
 import br.com.bittencourt.boni.lucas.blueshoes.view.FormFragment;
+import br.com.bittencourt.boni.lucas.blueshoes.view.config.ConfigFormFragment;
 
-public class ConfigEmailFragment extends FormFragment {
+public class FormEmailFragment extends ConfigFormFragment {
 
     //public static final String TAB_TITLE =  Resources.getSystem().getString(R.string.config_connection_data_tab_email);
-    public static final String TAB_TITLE = "E-MAIL";
+    //public static final String TAB_TITLE = "E-MAIL";
 
     private EditText et_new_email_confirm;
     private EditText et_current_email;
@@ -103,4 +104,8 @@ public class ConfigEmailFragment extends FormFragment {
             bt_update_email_login.setText(getString( R.string.update_email_login));
     }
 
+    @Override
+    public int title() {
+        return R.string.config_connection_data_tab_email;
+    }
 }

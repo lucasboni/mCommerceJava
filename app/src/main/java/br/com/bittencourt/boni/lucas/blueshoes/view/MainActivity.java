@@ -35,6 +35,7 @@ import br.com.bittencourt.boni.lucas.blueshoes.domain.User;
 import br.com.bittencourt.boni.lucas.blueshoes.util.NavMenuItemDetailsLookup;
 import br.com.bittencourt.boni.lucas.blueshoes.util.NavMenuItemKeyProvider;
 import br.com.bittencourt.boni.lucas.blueshoes.util.NavMenuItemPredicate;
+import br.com.bittencourt.boni.lucas.blueshoes.view.config.profile.AccountSettingsActivity;
 
 /**
  * Icones tirados de http://materialdesignicons.com/
@@ -98,8 +99,6 @@ public class MainActivity extends AppCompatActivity
         initNavMenu( savedInstanceState );//inicia os menus do navbar
         initFragment();//inicia o fragmenteinicial
 
-        //NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        //navigationView.setNavigationItemSelectedListener(this);
 
 
         bt_login.setOnClickListener(new View.OnClickListener() {
@@ -121,7 +120,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        //DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START);
         } else {

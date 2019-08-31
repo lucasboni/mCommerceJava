@@ -1,11 +1,11 @@
-package br.com.bittencourt.boni.lucas.blueshoes.view.config.creditcard;
-
-import android.content.Context;
+package br.com.bittencourt.boni.lucas.blueshoes.view.config.connectiondata;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+
+
 
 /**
  * Um FragmentPagerAdapter que retorna um fragmento correspondendo
@@ -17,17 +17,13 @@ import androidx.fragment.app.FragmentPagerAdapter;
  * eles possam ser utilizados novamente, isso enquanto houver
  * caminho de volta a eles (transição entre Tabs, por exemplo).
  */
-public class ConfigCreditCardsSectionsAdapter extends FragmentPagerAdapter {
-
+public class ConnectionDataSectionsAdapter extends FragmentPagerAdapter {
 
     private static final int TOTAL_PAGES = 2;
-    private static final int CREDIT_CARDS_PAGE_POS = 0;
-    
-    private Context context;
+    private static final int  EMAIL_PAGE_POS = 0;
 
-    public ConfigCreditCardsSectionsAdapter(Context context,FragmentManager fm) {
+    public ConnectionDataSectionsAdapter(FragmentManager fm) {
         super(fm);
-        this.context = context;
     }
 
     /*
@@ -37,20 +33,22 @@ public class ConfigCreditCardsSectionsAdapter extends FragmentPagerAdapter {
      * */
     @Override
     public Fragment getItem(int position) {
-        if(position == CREDIT_CARDS_PAGE_POS ){
-            return new ConfigCreditCardsListFragment();
-        }else{
-            return new ConfigNewCreditCardFragment();
+        switch (position) {
+            case EMAIL_PAGE_POS:
+                return  new FormEmailFragment();
+            default:
+                return new FormPasswordFragment();
         }
     }
 
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
-        if(position == CREDIT_CARDS_PAGE_POS){
-            return context.getString(ConfigCreditCardsListFragment.TAB_TITLE);
-        }else{
-            return context.getString(ConfigNewCreditCardFragment.TAB_TITLE);
+        switch (position) {
+            case EMAIL_PAGE_POS:
+                return  FormEmailFragment.TAB_TITLE;
+            default:
+                return FormPasswordFragment.TAB_TITLE;
         }
     }
 

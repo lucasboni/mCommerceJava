@@ -96,7 +96,7 @@ public class SignUpActivity extends FormEmailAndPasswordActivity {
     }
 
     @Override
-    void blockFields(Boolean status) {
+    public void blockFields(Boolean status) {
         et_email.setEnabled(!status);
         et_password.setEnabled(!status);
         et_confirm_password.setEnabled(!status);
@@ -104,7 +104,7 @@ public class SignUpActivity extends FormEmailAndPasswordActivity {
     }
 
     @Override
-    void isMainButtonSending(Boolean status) {
+    protected void isMainButtonSending(Boolean status) {
         if (status)
             bt_sign_up.setText(getString(R.string.sign_up_going));
         else

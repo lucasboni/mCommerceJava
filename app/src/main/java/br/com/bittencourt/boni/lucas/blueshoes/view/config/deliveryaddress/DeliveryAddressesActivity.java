@@ -14,7 +14,7 @@ import com.google.android.material.tabs.TabLayout;
 
 import br.com.bittencourt.boni.lucas.blueshoes.R;
 
-public class ConfigDeliveryAddressesActivity extends AppCompatActivity {
+public class DeliveryAddressesActivity extends AppCompatActivity {
 
 
     private Toolbar toolbar;
@@ -53,7 +53,7 @@ public class ConfigDeliveryAddressesActivity extends AppCompatActivity {
          * no ViewPager.
          * */
         PagerAdapter sectionsPagerAdapter =
-                new ConfigDeliveryAddressesSectionsAdapter(
+                new DeliveryAddressesSectionsAdapter(
                         this,
                         getSupportFragmentManager()
                 );
@@ -109,6 +109,6 @@ public class ConfigDeliveryAddressesActivity extends AppCompatActivity {
     }
 
     private boolean isNewDeliveryAddressFormNotInScreen() {
-        return view_pager.getCurrentItem() != ConfigNewDeliveryAddressFragment.PAGER_POS;
+        return view_pager.getCurrentItem() != FormNewDeliveryAddressFragment.PAGER_POS;
     }
 }

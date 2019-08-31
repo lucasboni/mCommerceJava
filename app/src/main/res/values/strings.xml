@@ -228,7 +228,7 @@
         Para adição e remoção de cartões de crédito.
     </string>
 
-    <!-- ConfigProfileActivity -->
+    <!-- ConfigActivity -->
     <string name="title_activity_config_profile">
         Perfil
     </string>
@@ -271,7 +271,7 @@
     <string name="dialog_password_cancel">CANCELAR</string>
 
 
-    <!-- ConfigEmailFragment -->
+    <!-- FormEmailFragment -->
     <string name="config_connection_data_tab_email">E-MAIL</string>
 
     <string name="hint_current_email">E-mail atual</string>
@@ -285,7 +285,7 @@
     <string name="update_email_login">Atualizar e-mail de login</string>
     <string name="update_email_login_going">Atualizando&#8230;</string>
 
-    <!-- ConfigPasswordFragment -->
+    <!-- FormPasswordFragment -->
     <string name="config_connection_data_tab_password">SENHA</string>
 
     <string name="hint_new_password">Nova senha</string>
@@ -294,13 +294,13 @@
     <string name="update_password">Atualizar senha</string>
     <string name="update_password_going">Atualizando&#8230;</string>
 
-    <!-- ConfigConnectionDataActivity -->
+    <!-- ConnectionDataActivity -->
     <string name="title_activity_config_connection_data">
         Conexão (login)
     </string>
 
 
-    <!-- ConfigCreditCardsListFragment -->
+    <!-- CreditCardsListFragment -->
     <string name="config_credit_cards_tab_list">CARTÕES</string>
 
     <string name="credit_card_list_empty">
@@ -319,7 +319,7 @@
     <string name="remove_item_going">Removendo&#8230;</string>
 
 
-    <!-- ConfigNewCreditCardFragment -->
+    <!-- FormCreditCardFragment -->
     <string name="config_credit_cards_tab_new">NOVO</string>
 
     <string name="add_credit_card_number_label">Número:</string>
@@ -346,13 +346,13 @@
         Cartão inválido, verifique os dados novamente.
     </string>
 
-    <!-- ConfigCreditCardsActivity -->
+    <!-- CreditCardsActivity -->
     <string name="title_activity_config_credit_cards">
         Cartões de crédito
     </string>
 
 
-    <!-- ConfigDeliveryAddressesListFragment -->
+    <!-- DeliveryAddressesListFragment -->
     <string name="config_delivery_addresses_tab_list">ENDEREÇOS</string>
 
     <string name="delivery_address_street_label">Logradouro:</string>
@@ -373,7 +373,7 @@
         Endereço removido com sucesso.
     </string>
 
-    <!-- ConfigNewDeliveryAddressFragment -->
+    <!-- FormNewDeliveryAddressFragment -->
     <string name="config_delivery_address_tab_new">NOVO</string>
 
     <string name="add_delivery_address_street_label">Logradouro:</string>
@@ -391,13 +391,13 @@
     <string name="add_delivery_address">Adicionar endereço</string>
     <string name="add_delivery_address_going">Adicionando&#8230;</string>
 
-    <!-- ConfigUpdateDeliveryAddressFragment -->
+    <!-- UpdateDeliveryAddressFragmentForm -->
     <string name="updating_delivery_address">Atualizando endereço.</string>
 
     <string name="update_delivery_address">Atualizar endereço</string>
     <string name="update_delivery_address_going">Atualizando&#8230;</string>
 
-    <!-- ConfigDeliveryAddressesActivity -->
+    <!-- DeliveryAddressesActivity -->
     <string name="title_activity_config_delivery_addresses">
         Endereços para entrega
     </string>

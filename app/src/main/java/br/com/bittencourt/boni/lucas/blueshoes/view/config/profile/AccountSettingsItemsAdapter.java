@@ -1,4 +1,4 @@
-package br.com.bittencourt.boni.lucas.blueshoes.view;
+package br.com.bittencourt.boni.lucas.blueshoes.view.config.profile;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;

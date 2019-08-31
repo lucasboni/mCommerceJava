@@ -1,8 +1,9 @@
-package br.com.bittencourt.boni.lucas.blueshoes.view.config.connectiondata;
+package br.com.bittencourt.boni.lucas.blueshoes.view.config.creditcard;
 
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -12,28 +13,25 @@ import com.google.android.material.tabs.TabLayout;
 
 import br.com.bittencourt.boni.lucas.blueshoes.R;
 
-public class ConfigConnectionDataActivity extends AppCompatActivity {
+public class CreditCardsActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView( R.layout.activity_tabs_user_config );
 
-        setContentView( R.layout.activity_tabs_user_config);
         toolbar = findViewById(R.id.toolbar);
 
-
         setSupportActionBar( toolbar );
-
-
 
         /*
          * Para liberar o back button na barra de topo da
          * atividade.
          * */
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled( true );
+        getSupportActionBar().setDisplayShowHomeEnabled( true );
 
         /*
          * Hackcode para que a imagem de background do layout não
@@ -48,8 +46,9 @@ public class ConfigConnectionDataActivity extends AppCompatActivity {
          * Criando o adaptador de fragmentos que ficarão expostos
          * no ViewPager.
          * */
-        ConfigConnectionDataSectionsAdapter sectionsPagerAdapter =
-                new ConfigConnectionDataSectionsAdapter(
+        CreditCardsSectionsAdapter sectionsPagerAdapter =
+                new CreditCardsSectionsAdapter(
+                        this,
                         getSupportFragmentManager()
                 );
 
@@ -57,7 +56,7 @@ public class ConfigConnectionDataActivity extends AppCompatActivity {
          * Acessando o ViewPager e vinculando o adaptador de
          * fragmentos a ele.
          * */
-        ViewPager viewPager = findViewById(R.id.view_pager);
+        ViewPager viewPager  = findViewById( R.id.view_pager );
         viewPager.setAdapter(sectionsPagerAdapter);
 
         /*
@@ -65,25 +64,16 @@ public class ConfigConnectionDataActivity extends AppCompatActivity {
          * para que haja sincronia na escolha realizada em
          * qualquer um destes componentes visuais.
          * */
-        TabLayout tabs = findViewById( R.id.tabs );
-        tabs.setupWithViewPager(viewPager);
+        TabLayout tabs  = findViewById( R.id.tabs );
+        tabs.setupWithViewPager( viewPager );
     }
 
-
-    /*
-     * Para permitir que o back button tenha a ação de volta para
-     * a atividade anterior.
-     * */
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if( item.getItemId() == android.R.id.home ){
             finish();
             return true;
         }
         return super.onOptionsItemSelected( item );
     }
-
-
-
 }

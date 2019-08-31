@@ -54,13 +54,13 @@ public class ForgotPasswordActivity extends FormActivity {
     }
 
     @Override
-    void blockFields(Boolean status) {
+    public void blockFields(Boolean status) {
         et_email.setEnabled(!status);
         bt_recover_password.setEnabled(!status);
     }
 
     @Override
-    void isMainButtonSending(Boolean status) {/* Antigo isSignInGoing() */
+    protected void isMainButtonSending(Boolean status) {/* Antigo isSignInGoing() */
         if(status){
             bt_recover_password.setText( getString( R.string.sign_in_going ));/* Entrando... */
         }else{

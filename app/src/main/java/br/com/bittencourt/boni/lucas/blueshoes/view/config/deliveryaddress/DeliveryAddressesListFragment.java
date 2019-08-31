@@ -14,9 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import br.com.bittencourt.boni.lucas.blueshoes.R;
 import br.com.bittencourt.boni.lucas.blueshoes.data.DeliveryAddressesDataBase;
 import br.com.bittencourt.boni.lucas.blueshoes.view.FormFragment;
-import br.com.bittencourt.boni.lucas.blueshoes.view.config.creditcard.UpdateScreamCallback;
+import br.com.bittencourt.boni.lucas.blueshoes.view.config.UpdateScreamCallback;
 
-public class ConfigDeliveryAddressesListFragment extends FormFragment {
+public class DeliveryAddressesListFragment extends FormFragment {
 
     public final static int TAB_TITLE = R.string.config_delivery_addresses_tab_list;
 
@@ -85,7 +85,7 @@ public class ConfigDeliveryAddressesListFragment extends FormFragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         rv_delivery_addresses.setLayoutManager(layoutManager);
 
-        RecyclerView.Adapter adapter = new ConfigDeliveryAddressesListItemsAdapter(
+        RecyclerView.Adapter adapter = new DeliveryAddressesListItemsAdapter(
                 DeliveryAddressesDataBase.getItems(), this);
         adapter.registerAdapterDataObserver(new RecyclerViewObserver());
         rv_delivery_addresses.setAdapter(adapter);

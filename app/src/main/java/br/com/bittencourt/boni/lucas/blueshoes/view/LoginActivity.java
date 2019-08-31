@@ -113,14 +113,14 @@ public class LoginActivity extends FormEmailAndPasswordActivity {
     }
 
     @Override
-    void blockFields(Boolean status) {
+    public void blockFields(Boolean status) {
         et_email.setEnabled(!status);
         et_password.setEnabled(!status);
         bt_login.setEnabled(!status);
     }
 
     @Override
-    void isMainButtonSending(Boolean status) {/* Antigo isSignInGoing() */
+    protected void isMainButtonSending(Boolean status) {/* Antigo isSignInGoing() */
 
         if(status){
             bt_login.setText( getString( R.string.sign_in_going ));/* Entrando... */
