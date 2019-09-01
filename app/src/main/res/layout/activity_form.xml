@@ -10,11 +10,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include layout="@layout/app_bar"
-        android:id="@+id/include_app_bar"/>
+    <include layout="@layout/app_bar" />
 
-    <include layout="@layout/content_form"
-        android:id="@+id/include_content_form"/>
+    <include layout="@layout/content_form"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

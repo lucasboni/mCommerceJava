@@ -1,9 +1,8 @@
-package br.com.bittencourt.boni.lucas.blueshoes.view.config.creditcard;
+package br.com.bittencourt.boni.lucas.blueshoes.view.config.connectiondata;
 
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -16,7 +15,7 @@ import br.com.bittencourt.boni.lucas.blueshoes.R;
 import br.com.bittencourt.boni.lucas.blueshoes.view.config.ConfigFormActivity;
 import br.com.bittencourt.boni.lucas.blueshoes.view.config.ConfigSectionsAdapter;
 
-public class CreditCardsActivity extends ConfigFormActivity {
+public class ConnectDataActivity extends ConfigFormActivity {
 
 
     @Override
@@ -24,8 +23,8 @@ public class CreditCardsActivity extends ConfigFormActivity {
         return new ConfigSectionsAdapter(
                 this,
                 getSupportFragmentManager(),
-                new CreditCardsListFragment(),
-                new FormCreditCardFragment()
+                new FormEmailFragment(),
+                new FormPasswordFragment()
         );
     }
 }

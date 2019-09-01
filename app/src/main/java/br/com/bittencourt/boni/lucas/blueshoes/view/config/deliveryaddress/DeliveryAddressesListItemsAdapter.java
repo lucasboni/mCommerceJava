@@ -122,7 +122,7 @@ public class DeliveryAddressesListItemsAdapter extends RecyclerView.Adapter<Deli
 
         private void toRemove(final int position) {
 
-            fragment.callbacksToUpdateItem(
+            fragment.callbacksToChangeItem(
                     new UpdateScreamCallback() {
                         @Override
                         public void action(boolean status) {

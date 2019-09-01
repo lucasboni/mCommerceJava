@@ -91,7 +91,7 @@ public class SignUpActivity extends FormEmailAndPasswordActivity {
     }
 
     @Override
-    void backEndFakeDelay() {
+    public void backEndFakeDelay() {
         backEndFakeDelay(false, getString(R.string.invalid_sign_up_email));
     }
 

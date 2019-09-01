@@ -29,7 +29,7 @@ import br.com.bittencourt.boni.lucas.blueshoes.view.FormActivity;
 
 import java.util.ArrayList;
 
-public class ConfigActivity extends FormActivity implements KeyboardUtils.OnSoftInputChangedListener {
+public class ProfileActivity extends FormActivity implements KeyboardUtils.OnSoftInputChangedListener {
 
     private EditText et_name;
     private RoundedImageView riv_profile;
@@ -138,7 +138,7 @@ public class ConfigActivity extends FormActivity implements KeyboardUtils.OnSoft
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    void callGallery(View view){
+    public void callGallery(View view){
         String colorPrimary = ColorUtils.int2ArgbString(
                 ColorUtils.getColor(R.color.colorPrimary)
         );

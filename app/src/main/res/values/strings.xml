@@ -228,7 +228,7 @@
         Para adição e remoção de cartões de crédito.
     </string>
 
-    <!-- ConfigActivity -->
+    <!-- ProfileActivity -->
     <string name="title_activity_config_profile">
         Perfil
     </string>
@@ -294,7 +294,7 @@
     <string name="update_password">Atualizar senha</string>
     <string name="update_password_going">Atualizando&#8230;</string>
 
-    <!-- ConnectionDataActivity -->
+    <!-- ConnectDataActivity -->
     <string name="title_activity_config_connection_data">
         Conexão (login)
     </string>

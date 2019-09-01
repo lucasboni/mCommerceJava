@@ -11,7 +11,6 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.databinding.DataBindingUtil;
 
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -23,37 +22,38 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import br.com.bittencourt.boni.lucas.blueshoes.R;
-import br.com.bittencourt.boni.lucas.blueshoes.databinding.ActivityFormBinding;
 
 public abstract class FormActivity extends AppCompatActivity {
 
-    protected ActivityFormBinding binding;
+    //protected ActivityFormBinding binding;
 
-    //private Toolbar toolbar;
-    //private FrameLayout fl_proxy_container;
-    //private FrameLayout fl_form_container;
+    private Toolbar toolbar;
+    private FrameLayout fl_proxy_container;
+    private FrameLayout fl_form_container;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.binding =  DataBindingUtil.setContentView(this, R.layout.activity_form);
-        //setContentView( R.layout.activity_form);
+        //this.binding =  DataBindingUtil.setContentView(this, R.layout.activity_form);
+        setContentView( R.layout.activity_form);
 
 
-        //FrameLayout fl_form = ;
+        FrameLayout fl_form = findViewById(R.id.fl_form);
+        fl_proxy_container =  findViewById(R.id.fl_proxy_container);
+        fl_form_container =  findViewById(R.id.fl_form_container);
 
         /*
          * Colocando a View de um arquivo XML como View filha
          * do item indicado no terceiro argumento.
          * */
-        View.inflate(this, getLayoutResourceID(), binding.includeContentForm.flForm);
+        View.inflate(this, getLayoutResourceID(), fl_form);
 
 
-        //toolbar =findViewById(R.id.toolbar);
+        toolbar =findViewById(R.id.toolbar);
         ;
         //fl_form_container =  findViewById(R.id.fl_form_container);
 
-        setSupportActionBar(binding.includeAppBar.toolbar);
+        setSupportActionBar(toolbar);
 
         /*
          * Para liberar o back button na barra de topo da
@@ -84,7 +84,6 @@ public abstract class FormActivity extends AppCompatActivity {
      * deve aguardar.
      * */
     protected void showProxy(boolean status){
-        FrameLayout fl_proxy_container =  binding.includeContentForm.includeProxyScreen.flProxyContainer;
         if(status){
             fl_proxy_container.setVisibility(View.VISIBLE);
         }else{
@@ -227,7 +226,7 @@ public abstract class FormActivity extends AppCompatActivity {
                         blockFields( false );
                         isMainButtonSending( false );
                         showProxy( false );
-                        snackBarFeedback(binding.includeContentForm.flFormContainer,statusAction,feedbackMessage);
+                        snackBarFeedback(fl_form_container,statusAction,feedbackMessage);
                     }
                 });
             }

@@ -19,8 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-        <include layout="@layout/proxy_screen"
-            android:id="@+id/include_proxy_screen"/>
+        <include layout="@layout/proxy_screen" />
 
     </FrameLayout>
 

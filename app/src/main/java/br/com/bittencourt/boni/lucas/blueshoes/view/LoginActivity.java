@@ -108,7 +108,7 @@ public class LoginActivity extends FormEmailAndPasswordActivity {
 
 
     @Override
-    void backEndFakeDelay() {
+    public void backEndFakeDelay() {
         backEndFakeDelay(false,getString( R.string.invalid_login ));
     }
 

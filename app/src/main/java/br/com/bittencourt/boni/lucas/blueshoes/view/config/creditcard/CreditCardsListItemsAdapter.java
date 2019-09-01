@@ -83,7 +83,7 @@ public class CreditCardsListItemsAdapter extends RecyclerView.Adapter<CreditCard
              * */
             final int selectedItem = getAdapterPosition();
 
-            fragment.callbacksToUpdateItem(
+            fragment.callbacksToChangeItem(
                     new UpdateScreamCallback() {
                         @Override
                         public void action(boolean status) {

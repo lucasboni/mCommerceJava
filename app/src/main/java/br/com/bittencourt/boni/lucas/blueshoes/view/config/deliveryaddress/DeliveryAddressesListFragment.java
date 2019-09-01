@@ -14,17 +14,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import br.com.bittencourt.boni.lucas.blueshoes.R;
 import br.com.bittencourt.boni.lucas.blueshoes.data.DeliveryAddressesDataBase;
 import br.com.bittencourt.boni.lucas.blueshoes.view.FormFragment;
+import br.com.bittencourt.boni.lucas.blueshoes.view.config.ConfigListFragment;
 import br.com.bittencourt.boni.lucas.blueshoes.view.config.UpdateScreamCallback;
 
-public class DeliveryAddressesListFragment extends FormFragment {
+public class DeliveryAddressesListFragment extends ConfigListFragment {
 
     public final static int TAB_TITLE = R.string.config_delivery_addresses_tab_list;
 
-    private UpdateScreamCallback callbackMainButtonUpdate;
+    /*private UpdateScreamCallback callbackMainButtonUpdate;
     private UpdateScreamCallback callbackBlockFields;
-    private UpdateScreamCallback callbackRemoveItem;
+    private UpdateScreamCallback callbackRemoveItem;*/
 
-    private RecyclerView rv_delivery_addresses;
+    /*private RecyclerView rv_delivery_addresses;
     private TextView tv_empty_list;
 
     @Nullable
@@ -34,19 +35,21 @@ public class DeliveryAddressesListFragment extends FormFragment {
         rv_delivery_addresses = view.findViewById(R.id.rv_delivery_addresses);
         tv_empty_list = view.findViewById(R.id.tv_empty_list);
         return view;
-    }
+    }*/
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        updateFlFormToFullFreeScreen();
-        initItems();
+        //updateFlFormToFullFreeScreen();
+        //initItems();
+
+        tv_empty_list.setText( R.string.delivery_address_list_empty );
     }
 
-    @Override
+    /*@Override
     public int getLayoutResourceID() {
         return R.layout.fragment_config_delivery_addresses_list;
-    }
+    }*/
 
     @Override
     public void backEndFakeDelay() {
@@ -56,7 +59,7 @@ public class DeliveryAddressesListFragment extends FormFragment {
         );
     }
 
-    @Override
+    /*@Override
     public void blockFields(Boolean status) {
         callbackBlockFields.action(status);
     }
@@ -65,21 +68,21 @@ public class DeliveryAddressesListFragment extends FormFragment {
     public void isMainButtonSending(Boolean status) {
         callbackMainButtonUpdate.action(status);
         callbackRemoveItem.action(status);
-    }
+    }*/
 
 
-    public void callbacksToUpdateItem(UpdateScreamCallback callbackMainButtonUpdate,
+    /*public void callbacksToUpdateItem(UpdateScreamCallback callbackMainButtonUpdate,
                                       UpdateScreamCallback callbackBlockFields,
                                       UpdateScreamCallback callbackRemoveItem) {
         this.callbackMainButtonUpdate = callbackMainButtonUpdate;
         this.callbackBlockFields = callbackBlockFields;
         this.callbackRemoveItem = callbackRemoveItem;
-    }
+    }*/
 
     /*
      * Método que inicializa a lista de endereços de entrega.
      * */
-    private void initItems() {
+    /*private void initItems() {
         rv_delivery_addresses.setHasFixedSize(false);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -89,6 +92,17 @@ public class DeliveryAddressesListFragment extends FormFragment {
                 DeliveryAddressesDataBase.getItems(), this);
         adapter.registerAdapterDataObserver(new RecyclerViewObserver());
         rv_delivery_addresses.setAdapter(adapter);
+    }*/
+
+    @Override
+    protected RecyclerView.Adapter getRecyclerViewAdapter() {
+        return new DeliveryAddressesListItemsAdapter(
+                DeliveryAddressesDataBase.getItems(), this);
+    }
+
+    @Override
+    public int title() {
+        return TAB_TITLE;
     }
 
     /*
@@ -98,7 +112,7 @@ public class DeliveryAddressesListFragment extends FormFragment {
      * podemos apresentar uma mensagem ao usuário informando
      * sobre a lista vazia.
      * */
-    private class RecyclerViewObserver extends RecyclerView.AdapterDataObserver {
+    /*private class RecyclerViewObserver extends RecyclerView.AdapterDataObserver {
 
         @Override
         public void onItemRangeRemoved(int positionStart, int itemCount) {
@@ -109,5 +123,5 @@ public class DeliveryAddressesListFragment extends FormFragment {
                 tv_empty_list.setVisibility(View.GONE);
             }
         }
-    }
+    }*/
 }

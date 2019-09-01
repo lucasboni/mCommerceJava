@@ -1,39 +1,41 @@
-package br.com.bittencourt.boni.lucas.blueshoes.view.config.connectiondata;
+package br.com.bittencourt.boni.lucas.blueshoes.view.config;
 
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 
 import br.com.bittencourt.boni.lucas.blueshoes.R;
 
-public class ConnectionDataActivity extends AppCompatActivity {
+public abstract class ConfigFormActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
+    protected ViewPager view_pager;
+    private TabLayout tabs;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setContentView( R.layout.activity_tabs_user_config);
+        setContentView( R.layout.activity_tabs_user_config );
         toolbar = findViewById(R.id.toolbar);
-
-
+        view_pager = findViewById(R.id.view_pager);
+        tabs = findViewById(R.id.tabs);
         setSupportActionBar( toolbar );
-
-
 
         /*
          * Para liberar o back button na barra de topo da
          * atividade.
          * */
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled( true );
+        getSupportActionBar().setDisplayShowHomeEnabled( true );
 
         /*
          * Hackcode para que a imagem de background do layout não
@@ -48,25 +50,20 @@ public class ConnectionDataActivity extends AppCompatActivity {
          * Criando o adaptador de fragmentos que ficarão expostos
          * no ViewPager.
          * */
-        ConnectionDataSectionsAdapter sectionsPagerAdapter =
-                new ConnectionDataSectionsAdapter(
-                        getSupportFragmentManager()
-                );
+        PagerAdapter sectionsPagerAdapter = getSectionsAdapter();
 
         /*
          * Acessando o ViewPager e vinculando o adaptador de
          * fragmentos a ele.
          * */
-        ViewPager viewPager = findViewById(R.id.view_pager);
-        viewPager.setAdapter(sectionsPagerAdapter);
+        view_pager.setAdapter(sectionsPagerAdapter);
 
         /*
          * Acessando o TabLayout e vinculando ele ao ViewPager
          * para que haja sincronia na escolha realizada em
          * qualquer um destes componentes visuais.
          * */
-        TabLayout tabs = findViewById( R.id.tabs );
-        tabs.setupWithViewPager(viewPager);
+        tabs.setupWithViewPager( view_pager );
     }
 
 
@@ -75,8 +72,7 @@ public class ConnectionDataActivity extends AppCompatActivity {
      * a atividade anterior.
      * */
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if( item.getItemId() == android.R.id.home ){
             finish();
             return true;
@@ -84,6 +80,6 @@ public class ConnectionDataActivity extends AppCompatActivity {
         return super.onOptionsItemSelected( item );
     }
 
-
+    public abstract FragmentPagerAdapter getSectionsAdapter();
 
 }

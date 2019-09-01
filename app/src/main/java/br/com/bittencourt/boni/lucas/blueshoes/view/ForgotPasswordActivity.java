@@ -49,7 +49,7 @@ public class ForgotPasswordActivity extends FormActivity {
 
 
     @Override
-    void backEndFakeDelay() {
+    public void backEndFakeDelay() {
         backEndFakeDelay(false,getString( R.string.invalid_login ));
     }
 

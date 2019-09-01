@@ -117,20 +117,25 @@
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.3"
-                        android:layout_marginRight="12dp"
+                        android:layout_height="match_parent"
                         android:layout_marginEnd="12dp"
+                        android:layout_marginRight="12dp"
+                        android:layout_weight="0.3"
                         android:orientation="vertical">
 
                         <TextView
                             style="@style/TextViewFormLabel"
-                            android:text="@string/add_credit_card_expiry_month_label"/>
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/add_credit_card_expiry_month_label" />
 
                         <Spinner
                             android:id="@+id/sp_credit_card_expiry_month"
                             style="@style/SpinnerForm"
-                            android:entries="@array/months_number"/>
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:entries="@array/months_number" />
+
                     </LinearLayout>
 
                     <LinearLayout

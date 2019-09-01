@@ -18,6 +18,6 @@
         android:text="@string/updating_delivery_address"/>
 
     <include
-        layout="@layout/fragment_config_new_delivery_address"/>
+        layout="@layout/fragment_config_list"/>
 
 </LinearLayout>

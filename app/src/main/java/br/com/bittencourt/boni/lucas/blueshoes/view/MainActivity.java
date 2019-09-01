@@ -35,7 +35,7 @@ import br.com.bittencourt.boni.lucas.blueshoes.domain.User;
 import br.com.bittencourt.boni.lucas.blueshoes.util.NavMenuItemDetailsLookup;
 import br.com.bittencourt.boni.lucas.blueshoes.util.NavMenuItemKeyProvider;
 import br.com.bittencourt.boni.lucas.blueshoes.util.NavMenuItemPredicate;
-import br.com.bittencourt.boni.lucas.blueshoes.view.config.profile.AccountSettingsActivity;
+import br.com.bittencourt.boni.lucas.blueshoes.view.config.AccountSettingsActivity;
 
 /**
  * Icones tirados de http://materialdesignicons.com/
