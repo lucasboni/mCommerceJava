@@ -24,6 +24,7 @@ import androidx.fragment.app.Fragment;
 
 
 import br.com.bittencourt.boni.lucas.blueshoes.R;
+import br.com.bittencourt.boni.lucas.blueshoes.util.CustomTypefaceSpan;
 
 public class PrivacyPolicyFragment extends Fragment {
 
@@ -113,7 +114,7 @@ public class PrivacyPolicyFragment extends Fragment {
                         R.font.pathway_gothic_one_regular
                     );
                 spannedText.setSpan(
-                        new RelativeSizeSpan(2f),
+                        new CustomTypefaceSpan(typeFace),
                 textStartPos,
                         textEndPos,
                         spanFlag
@@ -201,6 +202,6 @@ public class PrivacyPolicyFragment extends Fragment {
          * o espaço em branco do início do texto de
          * Políticas de Privacidade no arquivo XML.
          * */
-        tv_privacy_policy_content.setText(spannedText);
+        tv_privacy_policy_content.setText(spannedText.toString().trim());
     }
 }
