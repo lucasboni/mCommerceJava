@@ -44,5 +44,8 @@
 
     <color name="colorTextBoxTransparent">#CCEEEEEE</color>
 
+    <color name="colorMediumYellow">#FFFFD840</color>
+    <color name="colorMediumRed">#FF0000</color>
+
 
 </resources>

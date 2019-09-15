@@ -36,6 +36,7 @@ import br.com.bittencourt.boni.lucas.blueshoes.util.NavMenuItemDetailsLookup;
 import br.com.bittencourt.boni.lucas.blueshoes.util.NavMenuItemKeyProvider;
 import br.com.bittencourt.boni.lucas.blueshoes.util.NavMenuItemPredicate;
 import br.com.bittencourt.boni.lucas.blueshoes.view.config.AccountSettingsActivity;
+import br.com.bittencourt.boni.lucas.blueshoes.view.shoes.AllShoesListFragment;
 
 /**
  * Icones tirados de http://materialdesignicons.com/
@@ -61,7 +62,7 @@ public class MainActivity extends AppCompatActivity
     private Button bt_login;
     private TextView tv_sign_up;
 
-    private User user = new User( "Lucas Boni", R.drawable.user,true);
+    private User user = new User( "Lucas Boni", R.drawable.user,false);
 
     private SelectionTracker<Long> selectNavMenuItems;
     private List<NavMenuItem> navMenuItems;
@@ -353,7 +354,7 @@ public class MainActivity extends AppCompatActivity
                 fragId = getIntent().getIntExtra(FRAGMENT_ID, 0);
             }
             if( fragId == 0 ){
-                fragId = R.id.item_about;
+                fragId = R.id.item_all_shoes;
             }
         }
 
@@ -369,8 +370,10 @@ public class MainActivity extends AppCompatActivity
                 return new AboutFragment();
             case R.id.item_contact:
                 return new ContactFragment();
+            case R.id.item_privacy_policy:
+                return new PrivacyPolicyFragment();
             default:
-                return new AboutFragment();
+                return new AllShoesListFragment();
         }
     }
 

@@ -351,6 +351,12 @@
         Cartões de crédito
     </string>
 
+    <!-- PrivacyPolicyFragment -->
+    <string name="privacy_policy_frag_title">
+        Políticas de privacidade
+    </string>
+
+
 
     <!-- DeliveryAddressesListFragment -->
     <string name="config_delivery_addresses_tab_list">ENDEREÇOS</string>
@@ -400,6 +406,30 @@
     <!-- DeliveryAddressesActivity -->
     <string name="title_activity_config_delivery_addresses">
         Endereços para entrega
+    </string>
+
+    <!-- AllShoesListFragment -->
+    <string name="all_shoes_list_frag_title">BlueShoes Calçados</string>
+
+    <string name="offer">Oferta</string>
+    <string name="money_sign">R$</string>
+    <string name="in_until">em até</string>
+    <string name="of">de</string>
+
+    <string name="content_desc_rate_star_1">
+        Primeira estrela da medição de avaliação dos compradores do tênis.
+    </string>
+    <string name="content_desc_rate_star_2">
+        Segunda estrela da medição de avaliação dos compradores do tênis.
+    </string>
+    <string name="content_desc_rate_star_3">
+        Terceira estrela da medição de avaliação dos compradores do tênis.
+    </string>
+    <string name="content_desc_rate_star_4">
+        Quarta estrela da medição de avaliação dos compradores do tênis.
+    </string>
+    <string name="content_desc_rate_star_5">
+        Quinta estrela da medição de avaliação dos compradores do tênis.
     </string>
 
 </resources>
